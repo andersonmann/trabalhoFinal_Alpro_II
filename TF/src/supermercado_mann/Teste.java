@@ -5,9 +5,7 @@ public class Teste {
 	public static void main(String[] args) {
 		
 		
-		//tstetete
-		// TODO Auto-generated method stub
-
+		System.out.println("Teste");
 	}
 
 }
