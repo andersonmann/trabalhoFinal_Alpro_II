@@ -1,5 +1,5 @@
 package supermercado_mann;
 
-public class Estadio {
+public class Roleta {
 
 }
