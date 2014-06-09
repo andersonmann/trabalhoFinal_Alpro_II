@@ -1,8 +1,9 @@
 package supermercado_mann;
 
+
 public class QueueLinked<E> implements QueueTAD<E>
 {
-    private static final class Node<E> {
+    static final class Node<E> {
         public E element;
         public Node<E> next;
         
@@ -12,9 +13,9 @@ public class QueueLinked<E> implements QueueTAD<E>
         }
     }
 
-    private Node<E> head;
-    private Node<E> tail;
-    private int count;
+    protected Node<E> head;
+    protected Node<E> tail;
+    protected int count;
     
     public QueueLinked()
     {
@@ -47,9 +48,11 @@ public class QueueLinked<E> implements QueueTAD<E>
         return head.element;
     }
     
-    public void add(E element)
+    public void add(Jogo jogo)
     {
-        Node<E> n = new Node<E>(element);
+        //Node<E> n = new Node<E>(jogo);
+        @SuppressWarnings("unchecked")
+		Node<E> n = (Node<E>) new Node<>(jogo);
         if (head == null)
            head = n;
         else
@@ -71,5 +74,51 @@ public class QueueLinked<E> implements QueueTAD<E>
            tail = null;
         count--;
         return item;            
-    }    
+    }  
+    
+	@Override
+	public E get(int index) {
+		if (index < 0 || index >= count) {
+			throw new IndexOutOfBoundsException("Posição invalida" + index);
+		}
+		Node<E> target = head;
+		for (int pos = 0; pos < index - 1; pos++) {
+			target = target.next;
+		}
+		return target.element;
+	}
+	
+	@Override
+	public E set(int index, E element) {
+		if (index < 0 || index >= count) {
+			throw new IndexOutOfBoundsException("Posição invalida" + index);
+		}
+		Node<E> target = head;
+		for (int pos = 0; pos < index - 1; pos++) {
+			target = target.next;
+		}
+		E aux = target.element; // salva referencia antiga
+		target.element = element; // nova referencia
+		return aux; // retorna referencia antiga
+	}
+
+	@Override
+	public void add(E element) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+    @Override
+    public String toString() {
+        String aux = "";
+        Node<E> atual = head;
+        while (atual != null) {
+            aux = aux + atual.element + " ";
+            atual = atual.next;
+        }
+        return aux;
+    }
+	
+	
+	
 }
