@@ -1,0 +1,5 @@
+50000,15/06/2014,Estádio Beira-Rio,França,Honduras,100
+52000,18/06/2014,Estádio Beira-Rio,Australia,Holanda,150
+51000,22/06/2014,Estádio Beira-Rio,Coreia do Sul, Argelia,350
+55000,25/06/2014,Estádio Beira-Rio,Nigeria,Argentina,150
+53500,30/06/2014,Estádio Beira-Rio,A,B,450
