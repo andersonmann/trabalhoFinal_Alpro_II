@@ -2,8 +2,8 @@ package supermercado_mann;
 
 /**
  * A classe <code>Jogo</code> representa os dados de um jogo.
- *  
- * O objeto jogo armazena.. 
+ * 
+ * O objeto jogo armazena..
  * 
  * @author anderson.mann@acad.pucrs.br
  * 
