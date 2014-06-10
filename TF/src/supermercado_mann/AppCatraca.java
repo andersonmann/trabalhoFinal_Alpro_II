@@ -13,11 +13,17 @@ public class AppCatraca {
 	/**
 	 * @param args
 	 * @throws IOException 
+	 * @throws EstadioException 
 	 */
-	public static void main(String[] args) throws IOException {
-		Reader<Jogo> r =  new Reader<>();
+	public static void main(String[] args) throws IOException, EstadioException {
+/*		Reader<Jogo> r =  new Reader<>();
 		r.loadGames();
-		System.out.println(r.toString());
+		System.out.println(r.toString());*/
+		
+		Socio s1 = new Socio("Anderson", "1010", Categoria.NADA_VAI_NOS_SEPARAR);
+		Socio s2 = new Socio("Eduardo", "2020", Categoria.CAMPEAO_DO_MUNDO);				
+		System.out.println(s1.toString());
+		System.out.println(s2.toString());
 		
 		/*Catraca<Object> roleta1 = new Catraca<Object>();
 		Random rnd = new Random();

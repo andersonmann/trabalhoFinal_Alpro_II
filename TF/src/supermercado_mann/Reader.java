@@ -7,8 +7,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import supermercado_mann.StackLinked.Node;
-
 /**
  * @author Anderson_M_Mann
  * 
