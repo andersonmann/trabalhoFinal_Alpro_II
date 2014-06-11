@@ -1,5 +1,7 @@
 package supermercado_mann;
 
+//teste
+
 import java.io.IOException;
 import java.util.Random;
 
