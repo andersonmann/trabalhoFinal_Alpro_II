@@ -2,4 +2,3 @@
 52000,18/06/2014,EstádioBeira-Rio,Australia,Holanda,150
 51000,22/06/2014,EstádioBeira-Rio,Coreia do Sul, Argelia,350
 55000,25/06/2014,EstádioBeira-Rio,Nigeria,Argentina,150
-53500,30/06/2014,EstádioBeira-Rio,A,B,450

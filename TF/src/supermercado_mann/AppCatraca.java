@@ -1,7 +1,5 @@
 package supermercado_mann;
 
-//teste
-
 import java.io.IOException;
 import java.util.Random;
 
@@ -22,7 +20,8 @@ public class AppCatraca {
 		r.loadGames();
 		System.out.println(r.toString());
 		
-		QueueLinked<Jogo> lista = new QueueLinked<>();
+		
+/*		QueueLinked<Jogo> lista = new QueueLinked<>();
 		
 		Socio s1 = new Socio("Anderson", "1010", Categoria.NADA_VAI_NOS_SEPARAR);
 		Socio s2 = new Socio("Eduardo", "2020", Categoria.CAMPEAO_DO_MUNDO);
@@ -32,7 +31,7 @@ public class AppCatraca {
 				"Honduras", 150);
 		
 		lista.add(j1);
-		System.out.println(""+lista.toString());
+		System.out.println(""+lista.toString());*/
 		
 /*		System.out.println(s1.toString());
 		System.out.println(s2.toString());*/
