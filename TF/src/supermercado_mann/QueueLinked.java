@@ -48,7 +48,7 @@ public class QueueLinked<E> implements QueueTAD<E>
         return head.element;
     }
     
-    public void add(Jogo jogo)
+/*    public void add(Jogo jogo)
     {
         //Node<E> n = new Node<E>(jogo);
         @SuppressWarnings("unchecked")
@@ -59,7 +59,20 @@ public class QueueLinked<E> implements QueueTAD<E>
            tail.next = n;
         tail = n;
         count++;        
-    }
+    }*/
+    
+	@Override
+	public void add(E element) {
+		// TODO Auto-generated method stub
+		Node<E> n = new Node<E>(element);
+        if (head == null)
+           head = n;
+        else
+           tail.next = n;
+        tail = n;
+        count++;   
+		
+	}
     
     public E remove()
     {
@@ -100,12 +113,6 @@ public class QueueLinked<E> implements QueueTAD<E>
 		E aux = target.element; // salva referencia antiga
 		target.element = element; // nova referencia
 		return aux; // retorna referencia antiga
-	}
-
-	@Override
-	public void add(E element) {
-		// TODO Auto-generated method stub
-		
 	}
 	
     @Override

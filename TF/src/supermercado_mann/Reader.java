@@ -13,11 +13,11 @@ import java.nio.file.Paths;
  */
 //public class Reader<E> extends StackLinked<E> {
 public class Reader<E> extends QueueLinkedEx<E> {
-
-	public QueueLinkedEx<E> lista;
+	
+	public QueueLinkedEx<Jogo> lista;
 
 	public Reader() {
-		lista = new QueueLinkedEx<E>();
+		lista = new QueueLinkedEx<Jogo>();
 	}
 
 	public void loadGames() throws IOException {
@@ -38,6 +38,7 @@ public class Reader<E> extends QueueLinkedEx<E> {
 				}*/
 				//lista.push(new Jogo(capacidade, data, local, time1, time2, valor));
 				lista.add(new Jogo(capacidade, data, local, time1, time2, valor));
+				//lista.add(jogo);
 			}
 		} catch (EstadioException e) {
 			System.err.println("Erro de E/S: " + e);

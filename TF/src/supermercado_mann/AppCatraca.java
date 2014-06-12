@@ -18,14 +18,24 @@ public class AppCatraca {
 	 * @throws EstadioException 
 	 */
 	public static void main(String[] args) throws IOException, EstadioException {
-/*		Reader<Jogo> r =  new Reader<>();
+		Reader<Jogo> r =  new Reader<>();
 		r.loadGames();
-		System.out.println(r.toString());*/
+		System.out.println(r.toString());
+		
+		QueueLinked<Jogo> lista = new QueueLinked<>();
 		
 		Socio s1 = new Socio("Anderson", "1010", Categoria.NADA_VAI_NOS_SEPARAR);
-		Socio s2 = new Socio("Eduardo", "2020", Categoria.CAMPEAO_DO_MUNDO);				
-		System.out.println(s1.toString());
-		System.out.println(s2.toString());
+		Socio s2 = new Socio("Eduardo", "2020", Categoria.CAMPEAO_DO_MUNDO);
+		
+		//QueueLinked<Jogo> lista = new QueueLinked<Jogo>();
+		Jogo j1 = new Jogo(100000, "17/06/2014", "Beira Rio", "França",
+				"Honduras", 150);
+		
+		lista.add(j1);
+		System.out.println(""+lista.toString());
+		
+/*		System.out.println(s1.toString());
+		System.out.println(s2.toString());*/
 		
 		/*Catraca<Object> roleta1 = new Catraca<Object>();
 		Random rnd = new Random();
