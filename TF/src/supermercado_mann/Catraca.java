@@ -2,14 +2,12 @@ package supermercado_mann;
 
 public class Catraca<E> extends QueueLinkedEx<E> {
 
-	protected QueueLinkedEx<Boolean> sociosEntraram;
-	// protected QueueLinked<Boolean> socios;
+	protected QueueLinkedEx<Boolean> sociosEntraram;	
 	protected QueueLinkedEx<Integer> sociosEspertos;
 	private int contador;
 
 	public Catraca() {
-		sociosEntraram = new QueueLinkedEx<Boolean>();
-		// socios = new QueueLinked<Boolean>();
+		sociosEntraram = new QueueLinkedEx<Boolean>();		
 		sociosEspertos = new QueueLinkedEx<Integer>();
 		contador = 0;
 		/*

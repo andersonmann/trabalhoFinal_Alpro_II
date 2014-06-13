@@ -1,13 +1,11 @@
 package supermercado_mann;
 
-import java.awt.List;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 
 /**
  * @author Anderson_M_Mann
@@ -19,7 +17,7 @@ public class Reader<E>  {
 	public Reader() {
 		lista = new QueueLinked<Jogo>();
 	}	
-	public void loadGames() throws IOException {
+	public void carregaJogos() throws IOException {
 		Path path = Paths.get("arquivo.txt");
 		try (BufferedReader br = Files.newBufferedReader(path,
 				Charset.defaultCharset())) {
@@ -31,8 +29,7 @@ public class Reader<E>  {
 				String local = dados[2];
 				String time1 = dados[3];
 				String time2 = dados[4];
-				double valor = Integer.parseInt(dados[5]);
-				//System.out.println(data.toString());				
+				double valor = Integer.parseInt(dados[5]);								
 				lista.add(new Jogo(capacidade, data, local, time1, time2, valor));				
 			}
 			
@@ -40,9 +37,8 @@ public class Reader<E>  {
 			System.err.println("Erro de E/S: " + e);
 		}
 		System.out.println("Tamanho "+ lista.count);
-		System.out.println(lista.toString());
-	}
-	
+		//System.out.println(lista.toString());		
+	}	
 
 /*	public boolean contemRepetidos(String data) {
 		for (int p = 0; p < lista.size(); p++) {
@@ -55,15 +51,25 @@ public class Reader<E>  {
 
 	/*public Jogo exibeJogo(String ian) throws EstadioException {
 		for (int i = 0; i < lista.size(); i++) {
-			if (lista.get(i).getIan().equals(ian)) {
+			if (lista.get(i).get().equals(ian)) {
 				return lista.get(i);
 			}
 		}
 		throw new EstadioException("O codigo IAN fornecido não existe");
 	}*/
-
 	
-  
-    
+	@Override
+	public String toString() {
+		if (lista.isEmpty()) {
+			return ("Lista vazia !!");
+		} else {
+			StringBuilder sb = new StringBuilder();
+			for (Jogo p : lista) {
+				sb.append(p.toString());
+				sb.append("\n");
+			}
+			return (sb.toString());
+		}
+	}   
 	
 }

@@ -1,7 +1,6 @@
 package supermercado_mann;
 
 import java.io.IOException;
-import java.util.Random;
 
 /* Como melhorar o algoritmo?
  * 
@@ -16,9 +15,9 @@ public class AppCatraca {
 	 * @throws EstadioException 
 	 */
 	public static void main(String[] args) throws IOException, EstadioException {
-		Reader<Jogo> r =  new Reader<>();
-		r.loadGames();
-		System.out.println(r.toString());
+		Reader<Jogo> reader =  new Reader<>();
+		reader.carregaJogos();
+		System.out.println(reader.toString());
 		
 		
 /*		QueueLinked<Jogo> lista = new QueueLinked<>();
