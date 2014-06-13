@@ -2,7 +2,7 @@ package supermercado_mann;
 
 import java.io.IOException;
 
-/* Como melhorar o algoritmo?
+/*//Como melhorar o algoritmo?
  * 
  * - Dividir os socios em várias listas (ex: 1-1000, 2000-3000, ...)
  * - Manter a lista ordenada e buscar de forma inteligente
