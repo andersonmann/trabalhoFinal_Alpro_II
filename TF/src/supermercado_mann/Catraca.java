@@ -27,7 +27,7 @@ public class Catraca<E> extends QueueLinkedEx<E> {
 		}
 		sociosEntraram.set(numeroSocio - 1, true);
 		return true;
-	}
+	}	
 
 	public boolean verificaDuplaEntrada(int numeroSocio) {
 		//contador++;

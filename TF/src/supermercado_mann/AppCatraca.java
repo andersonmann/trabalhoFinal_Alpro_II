@@ -34,7 +34,7 @@ public class AppCatraca {
 		long antes = System.currentTimeMillis();
 		for (int i = 0; i < 100000; i++) {
 			int numeroSocio = rnd.nextInt(100000) + 1;
-			catraca.entra(numeroSocio);
+			catraca.entra(numeroSocio);			
 		}
 		long depois = System.currentTimeMillis();
 		double tempo = (depois - antes);
