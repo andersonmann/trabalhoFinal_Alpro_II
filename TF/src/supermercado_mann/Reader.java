@@ -18,7 +18,7 @@ public class Reader<E>  {
 		lista = new QueueLinked<Jogo>();
 	}	
 	public void carregaJogos() throws IOException {
-		Path path = Paths.get("arquivo.txt");
+		Path path = Paths.get("DadosJogos.txt");
 		try (BufferedReader br = Files.newBufferedReader(path,
 				Charset.defaultCharset())) {
 			String linha = null;
