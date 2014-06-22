@@ -4,27 +4,30 @@ public class Socio {
 	private String nome;
 	private String matricula;
 	private Categoria categoria;
+	private Modalidade modalidade;
 	private double valorMensalidade;
 
-	public Socio(String nome, String matricula, Categoria categoria) throws EstadioException { //double valorMensalidade
+	public Socio(String nome, String matricula, Categoria categoria, Modalidade modalidade)
+			throws EstadioException { 
 		checkNome(nome);
 		checkMatricula(matricula);
-		//checkValor(valorMensalidade);
-
+		// checkValor(valorMensalidade);
 		if (categoria.equals(Categoria.CAMPEAO_DO_MUNDO)) {
 			setCategoria(categoria);
-		}
-		if (categoria.equals(Categoria.NADA_VAI_NOS_SEPARAR)) {
-			setCategoria(categoria);
-		}
-		if (categoria.equals(Categoria.CAMPEAO_DO_MUNDO)) {
 			valorMensalidade = 40;
 		}
 		if (categoria.equals(Categoria.NADA_VAI_NOS_SEPARAR)) {
+			setCategoria(categoria);
 			valorMensalidade = 60;
 		}
+		/*
+		 * if (categoria.equals(Categoria.CAMPEAO_DO_MUNDO)) { valorMensalidade
+		 * = 40; } if (categoria.equals(Categoria.NADA_VAI_NOS_SEPARAR)) {
+		 * valorMensalidade = 60; }
+		 */
 		this.nome = nome;
 		this.matricula = matricula;
+		this.modalidade = modalidade;
 	}
 
 	private void checkNome(String none) throws EstadioException {
@@ -39,11 +42,11 @@ public class Socio {
 		}
 	}
 
-/*	private void checkValor(double valorMensalidade) throws EstadioException {
-		if (valorMensalidade <= 0) {
-			throw new EstadioException("O valor deve ser maior do que zero!");
-		}
-	}*/
+	/*
+	 * private void checkValor(double valorMensalidade) throws EstadioException
+	 * { if (valorMensalidade <= 0) { throw new
+	 * EstadioException("O valor deve ser maior do que zero!"); } }
+	 */
 
 	/**
 	 * @return the nome
@@ -81,6 +84,20 @@ public class Socio {
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
+	
+	/**
+	 * @return the modalidade
+	 */
+	public Modalidade getModalidade() {
+		return modalidade;
+	}
+
+	/**
+	 * @param modalidade the modalidade to set
+	 */
+	public void setModalidade(Modalidade modalidade) {
+		this.modalidade = modalidade;
+	}
 
 	/**
 	 * @return the valorMensalidade
@@ -100,7 +117,7 @@ public class Socio {
 	@Override
 	public String toString() {
 		return String
-				.format("Dados do socio [nome= %s, matricula= %s, categoria= %s, valorMensaliade= %s]",
-						nome, matricula, categoria, valorMensalidade);
+				.format("Dados do socio [nome= %s, matricula= %s, categoria= %s, modaliade= %s, valorMensaliade= %s]",
+						nome, matricula, categoria, modalidade, valorMensalidade);
 	}
 }
