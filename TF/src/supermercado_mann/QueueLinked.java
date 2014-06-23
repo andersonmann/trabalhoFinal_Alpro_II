@@ -53,7 +53,6 @@ public class QueueLinked<E> implements QueueTAD<E>, Iterable<E> {
 			tail.next = n;
 		tail = n;
 		count++;
-
 	}
 
 	public E remove() {

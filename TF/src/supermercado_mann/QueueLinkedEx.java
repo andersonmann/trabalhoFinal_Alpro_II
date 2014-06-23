@@ -28,9 +28,20 @@ public class QueueLinkedEx<E> extends QueueLinked<E> implements QueueTADEx<E> {
 		return aux; // retorna referencia antiga
 	}
 
-	/*public void add(Jogo jogo) {
-		// TODO Auto-generated method stub
-		
-	}*/
+	@Override
+	public int indexOf(E e) {
+		Node<E> aux = head.next;
+		int pos = 0;
+		while (aux != tail) {
+			if (aux.element.equals(e))
+				return pos;
+			aux = aux.next;
+		}
+		return -1;
+	}
 
+	@Override
+	public boolean contains(E e) {
+		return indexOf(e) != -1;
+	}
 }

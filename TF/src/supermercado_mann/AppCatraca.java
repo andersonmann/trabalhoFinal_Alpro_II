@@ -19,13 +19,15 @@ public class AppCatraca {
 		Reader<Jogo> reader = new Reader<>();
 		reader.carregaJogos();
 		System.out.println(reader.toString());
-		
-		Socio s1 = new Socio("Anderson", "1010", Categoria.NADA_VAI_NOS_SEPARAR, Modalidade.COMUM);
-		Socio s2 = new Socio("Eduardo", "2020", Categoria.CAMPEAO_DO_MUNDO, Modalidade.ESTUDANTE);
-		System.out.println("Socio 1 " + s1.toString());
-		System.out.println("Socio 2 " + s2.toString());		
+		Socio s1 = new Socio("Anderson", 1010, Categoria.NADA_VAI_NOS_SEPARAR,
+				Modalidade.COMUM);
+		//Socio s2 = new Socio("Eduardo", 2020, Categoria.CAMPEAO_DO_MUNDO,Modalidade.ESTUDANTE);
+		System.out.println(s1.toString());
+		//System.out.println(s2.toString());
 
 		Catraca<Object> catraca = new Catraca<Object>();
+		catraca.entra(1010);
+
 		Random rnd = new Random();
 		long antes = System.currentTimeMillis();
 		for (int i = 0; i < 100000; i++) {

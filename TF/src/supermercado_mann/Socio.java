@@ -2,12 +2,12 @@ package supermercado_mann;
 
 public class Socio {
 	private String nome;
-	private String matricula;
+	private int matricula;
 	private Categoria categoria;
 	private Modalidade modalidade;
 	private double valorMensalidade;
 
-	public Socio(String nome, String matricula, Categoria categoria, Modalidade modalidade)
+	public Socio(String nome, int matricula, Categoria categoria, Modalidade modalidade)
 			throws EstadioException { 
 		checkNome(nome);
 		checkMatricula(matricula);
@@ -36,8 +36,8 @@ public class Socio {
 		}
 	}
 
-	private void checkMatricula(String matricula) throws EstadioException {
-		if (matricula == null || "".equalsIgnoreCase(matricula)) {
+	private void checkMatricula(int matricula) throws EstadioException {
+		if (matricula < 0) {
 			throw new EstadioException("A matricula não pode ser null.");
 		}
 	}
@@ -58,7 +58,7 @@ public class Socio {
 	/**
 	 * @return the matricula
 	 */
-	public String getMatricula() {
+	public int getMatricula() {
 		return matricula;
 	}
 
@@ -66,7 +66,7 @@ public class Socio {
 	 * @param matricula
 	 *            the matricula to set
 	 */
-	public void setMatricula(String matricula) {
+	public void setMatricula(int matricula) {
 		this.matricula = matricula;
 	}
 

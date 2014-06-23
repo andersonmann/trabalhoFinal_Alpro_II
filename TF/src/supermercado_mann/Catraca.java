@@ -6,6 +6,11 @@ public class Catraca<E> extends QueueLinkedEx<E> {
 	protected QueueLinkedEx<Integer> sociosEspertos;
 	private int contador;
 
+	/*
+	 * Adicionar um metodo que leia de um arquivo a quantidade de torcedores que
+	 * irão entrar no estadio
+	 */
+
 	public Catraca() {
 		sociosEntraram = new QueueLinkedEx<Boolean>();
 		sociosEspertos = new QueueLinkedEx<Integer>();
@@ -19,18 +24,18 @@ public class Catraca<E> extends QueueLinkedEx<E> {
 		}
 	}
 
-	public boolean entra(int numeroSocio) {
+	public boolean entra(int matricula) {
 		contador++;
-		if (sociosEntraram.get(numeroSocio - 1) == true) {
-			sociosEspertos.add(numeroSocio);
+		if (sociosEntraram.get(matricula - 1) == true) {
+			sociosEspertos.add(matricula);
 			return false;
 		}
-		sociosEntraram.set(numeroSocio - 1, true);
+		sociosEntraram.set(matricula - 1, true);
 		return true;
-	}	
+	}
 
 	public boolean verificaDuplaEntrada(int numeroSocio) {
-		//contador++;
+		contador++;
 		if (sociosEntraram.get(numeroSocio - 1) == true) {
 			return true;
 		}
@@ -39,7 +44,7 @@ public class Catraca<E> extends QueueLinkedEx<E> {
 
 	public boolean verificaDuplaEntradaV2(int numeroSocio) {
 		for (Integer socio : sociosEspertos) {
-			//contador++;
+			contador++;
 			if (socio == numeroSocio) {
 				return true;
 			}
