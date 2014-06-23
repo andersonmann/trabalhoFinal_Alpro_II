@@ -19,20 +19,19 @@ public class AppCatraca {
 		Reader<Jogo> reader = new Reader<>();
 		reader.carregaJogos();
 		System.out.println(reader.toString());
-		Socio s1 = new Socio("Anderson", 1010, Categoria.NADA_VAI_NOS_SEPARAR,
-				Modalidade.COMUM);
-		//Socio s2 = new Socio("Eduardo", 2020, Categoria.CAMPEAO_DO_MUNDO,Modalidade.ESTUDANTE);
+		
+		/*Socio s1 = new Socio("Anderson", 1010, Categoria.NADA_VAI_NOS_SEPARAR, Modalidade.COMUM);
+		Socio s2 = new Socio("Eduardo", 2020, Categoria.CAMPEAO_DO_MUNDO,Modalidade.ESTUDANTE);
 		System.out.println(s1.toString());
-		//System.out.println(s2.toString());
-
+		System.out.println(s2.toString());
+		*/
 		Catraca<Object> catraca = new Catraca<Object>();
-		catraca.entra(1010);
-
-		Random rnd = new Random();
+		
+		Random random = new Random();
 		long antes = System.currentTimeMillis();
 		for (int i = 0; i < 100000; i++) {
-			int numeroSocio = rnd.nextInt(100000) + 1;
-			catraca.entra(numeroSocio);
+			int matricula = random.nextInt(100000) + 1;
+			catraca.entra(matricula);
 		}
 		long depois = System.currentTimeMillis();
 		double tempo = (depois - antes);
@@ -45,7 +44,8 @@ public class AppCatraca {
 		System.out.println("Total de operações de acesso: "
 				+ catraca.getContador());
 		System.out.println("Tempo de processamento: " + tempo + " ms");
-		catraca.add(51127);
-		System.out.println(catraca.verificaDuplaEntrada(51127));
+		//catraca.entra(1010);
+		catraca.entra(1010);
+		System.out.println("Verifica se o socio de matricula 1010 entrou : " + catraca.verificaEntrada(1010));
 	}
 }
