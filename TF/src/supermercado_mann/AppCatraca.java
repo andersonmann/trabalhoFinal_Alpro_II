@@ -18,6 +18,7 @@ public class AppCatraca {
 	public static void main(String[] args) throws IOException, EstadioException {
 		Reader<Jogo> reader = new Reader<>();
 		reader.carregaJogos();
+		//Exibe os dados dos jogos
 		System.out.println(reader.toString());
 		
 		/*Socio s1 = new Socio("Anderson", 1010, Categoria.NADA_VAI_NOS_SEPARAR, Modalidade.COMUM);
@@ -25,8 +26,7 @@ public class AppCatraca {
 		System.out.println(s1.toString());
 		System.out.println(s2.toString());
 		*/
-		Catraca<Object> catraca = new Catraca<Object>();
-		
+		Catraca<Object> catraca = new Catraca<Object>();		
 		Random random = new Random();
 		long antes = System.currentTimeMillis();
 		for (int i = 0; i < 100000; i++) {
@@ -44,8 +44,9 @@ public class AppCatraca {
 		System.out.println("Total de operações de acesso: "
 				+ catraca.getContador());
 		System.out.println("Tempo de processamento: " + tempo + " ms");
-		//catraca.entra(1010);
 		catraca.entra(1010);
+		//catraca.entra(1010);
 		System.out.println("Verifica se o socio de matricula 1010 entrou : " + catraca.verificaEntrada(1010));
+		System.out.println("Verifica dupla entrada do socio de matricula 1010 : " + catraca.duplaEntrada(1010));
 	}
 }

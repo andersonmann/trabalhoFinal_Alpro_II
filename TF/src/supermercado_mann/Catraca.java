@@ -5,6 +5,7 @@ public class Catraca<E> extends QueueLinkedEx<E> {
 	protected QueueLinkedEx<Integer> sociosEntraram;
 	protected QueueLinkedEx<Integer> sociosEspertos;
 	private long contador;
+
 	/*
 	 * Adicionar um metodo que leia de um arquivo a quantidade de torcedores que
 	 * irão entrar no estadio
@@ -15,31 +16,25 @@ public class Catraca<E> extends QueueLinkedEx<E> {
 		contador = 0;
 		/*
 		 * Adicionados 100.000 posições com o valor false, indicando que nenhum
-		 * socio entrou ainda
+		 * socio entrou ainda for (int pos = 0; pos < 100000; pos++) {
+		 * sociosEntraram.add(false); }
 		 */
-		//for (int pos = 0; pos < 100000; pos++) {
-			//sociosEntraram.add(pos);
-			// sociosEntraram.add(false);
-		//}
 	}
-	
-	public void entra(int matricula){
-		if(verificaEntrada(matricula) == true){
-			sociosEspertos.add(matricula);			
-		}
-		sociosEntraram.add(matricula);				
-	}
-		
-	/*public boolean entra(int matricula) {
-		contador++;
-		if (verificaDuplaEntradaV2(matricula) == true) {
+
+	public void entra(int matricula) {
+		if (verificaEntrada(matricula) == true) {
 			sociosEspertos.add(matricula);
-			return false;
 		}
 		sociosEntraram.add(matricula);
-		return true;
-	}*/
-	
+	}
+
+	/*
+	 * public boolean entra(int matricula) { contador++; if
+	 * (verificaDuplaEntradaV2(matricula) == true) {
+	 * sociosEspertos.add(matricula); return false; }
+	 * sociosEntraram.add(matricula); return true; }
+	 */
+
 	/*
 	 * public boolean entra(int matricula) { contador++; if
 	 * (sociosEntraram.get(matricula - 1) == true) {
@@ -55,6 +50,16 @@ public class Catraca<E> extends QueueLinkedEx<E> {
 
 	public boolean verificaEntrada(int matricula) {
 		for (Integer socio : sociosEntraram) {
+			contador++;
+			if (socio == matricula) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean duplaEntrada(int matricula) {
+		for (Integer socio : sociosEspertos) {
 			contador++;
 			if (socio == matricula) {
 				return true;
