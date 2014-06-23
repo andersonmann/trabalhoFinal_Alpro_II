@@ -41,7 +41,6 @@ public class Socio {
 			throw new EstadioException("A matricula não pode ser null.");
 		}
 	}
-
 	/*
 	 * private void checkValor(double valorMensalidade) throws EstadioException
 	 * { if (valorMensalidade <= 0) { throw new
