@@ -38,7 +38,7 @@ public class Reader<E> {
 			System.err.println("Erro de E/S: " + e);
 		}
 		// Exibe o tamanho da lista
-		System.out.println("Tamanho " + lista.count);
+		//System.out.println("Tamanho " + lista.count);
 	}
 
 	/*

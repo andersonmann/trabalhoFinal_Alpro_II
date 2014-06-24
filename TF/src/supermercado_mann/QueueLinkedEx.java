@@ -30,9 +30,9 @@ public class QueueLinkedEx<E> extends QueueLinked<E> implements QueueTADEx<E> {
 
 	@Override
 	public int indexOf(E e) {
-		Node<E> aux = head.next;
+		Node<E> aux = head;
 		int pos = 0;
-		while (aux != tail) {
+		while (aux != null) {
 			if (aux.element.equals(e))
 				return pos;
 			aux = aux.next;
