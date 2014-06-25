@@ -1,13 +1,21 @@
 package supermercado_mann;
 
-public class Catraca<E> extends QueueLinkedEx<E> {
+/* TAREFAS 
+ * Criar um método para validar o ingresso
+ * Criar um método para verificar a mensalidade
+ * Estudar formas de criar inumeros Sócios.
+ * Avaliar quais métodos podem ser alterados e passarem a utilizar a matricula como parametro
+ * Criar um modo eficaz de contar as operações realizadas * 
+ */
 
+public class Catraca<E> extends QueueLinkedEx<E> {
 	// protected QueueLinkedEx<Integer> sociosEntraram;
 	// protected QueueLinkedEx<Integer> sociosEspertos;
 	protected QueueLinkedEx<Socio> filaSociosComuns;
 	protected QueueLinkedEx<Socio> filaSociosEstudantes;
 	protected QueueLinkedEx<Socio> filaSociosIdosos;
 	protected QueueLinkedEx<Socio> filaSociosEspertos;
+	protected QueueLinkedEx<Socio> publicoTotal; // Criar método que retorne todos os socios que entraram	
 	Socio socio;
 	private long contador;
 
@@ -18,6 +26,7 @@ public class Catraca<E> extends QueueLinkedEx<E> {
 		filaSociosEstudantes = new QueueLinkedEx<Socio>();
 		filaSociosIdosos = new QueueLinkedEx<Socio>();
 		filaSociosEspertos = new QueueLinkedEx<Socio>();
+		publicoTotal =  new QueueLinkedEx<Socio>();		
 		contador = 0;
 	}
 
@@ -105,6 +114,10 @@ public class Catraca<E> extends QueueLinkedEx<E> {
 
 	public QueueLinkedEx<Socio> listaEspertos() {
 		return filaSociosEspertos;
+	}
+	
+	public int publicTotal(){
+		return listaSociosComuns().size() + listaSociosEstudantes().size() + listaSociosIdosos().size();
 	}
 
 	/*
