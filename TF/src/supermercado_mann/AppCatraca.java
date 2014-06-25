@@ -18,43 +18,86 @@ public class AppCatraca {
 	public static void main(String[] args) throws IOException, EstadioException {
 		Reader<Jogo> reader = new Reader<>();
 		reader.carregaJogos();
-		//Exibe os dados dos jogos
-		//System.out.println(reader.toString());		
-		Socio s1 = new Socio("Anderson", 1010, Categoria.NADA_VAI_NOS_SEPARAR, Modalidade.COMUM);
-		Socio s2 = new Socio("Eduardo", 2020, Categoria.CAMPEAO_DO_MUNDO,Modalidade.ESTUDANTE);
-		/*
-		System.out.println(s1.toString());
-		System.out.println(s2.toString());
-		*/
-		Catraca<Object> catraca = new Catraca<Object>();		
-		//Random random = new Random();
+		// Exibe os dados dos jogos
+		// System.out.println(reader.toString());
+		Socio s1 = new Socio("Anderson", 1010, Categoria.NADA_VAI_NOS_SEPARAR,
+				Modalidade.ESTUDANTE);
+		Socio s2 = new Socio("Eduardo", 2020, Categoria.CAMPEAO_DO_MUNDO,
+				Modalidade.ESTUDANTE);
+		Socio s3 = new Socio("Julio", 3030, Categoria.CAMPEAO_DO_MUNDO,
+				Modalidade.IDOSO);
+		Socio s4 = new Socio("Amauri", 4040, Categoria.NADA_VAI_NOS_SEPARAR,
+				Modalidade.ESTUDANTE);
+		Catraca<Object> catraca = new Catraca<Object>();
 		long antes = System.currentTimeMillis();
-		/*for (int i = 0; i < 100000; i++) {
-			int matricula = random.nextInt(100000) + 1;
-			catraca.entra(matricula);
-		}*/
-		//System.out.println("Modalidade: " + s1.getModalidade());
-		//System.out.println("Modalidade:" + catraca.verificaModalidade(s1));		
-		catraca.entrar(s1);	
+		// Random random = new Random();
+		/*
+		 * for (int i = 0; i < 100000; i++) { int matricula =
+		 * random.nextInt(100000) + 1; catraca.entra(matricula); }
+		 */
+		catraca.entrar(s1);
+		catraca.entrar(s1);
 		catraca.entrar(s2);
-		System.out.println("Posição: teste indexOf: " + catraca.indexOf(s1));
-		QueueLinkedEx<Socio> listaComum = catraca.listaSociosComuns();	
-		for(Socio i : listaComum){
-			System.out.println("Socios " + i);
-		}		
+		catraca.entrar(s3);
+		catraca.entrar(s4);
+		QueueLinkedEx<Socio> listaSociosComuns = catraca.listaSociosComuns();
+		QueueLinkedEx<Socio> listaSociosEstudantes = catraca
+				.listaSociosEstudantes();
+		QueueLinkedEx<Socio> listaSociosIdosos = catraca.listaSociosIdosos();
+		QueueLinkedEx<Socio> listaSociosEspertos = catraca.listaEspertos();
+		for (Socio comum : listaSociosComuns) {
+			System.out.println("Socios modalidade comum: " + comum);
+		}
+		for (Socio estudante : listaSociosEstudantes) {
+			System.out.println("Socios modalidade estudante: " + estudante);
+		}
+		for (Socio idoso : listaSociosIdosos) {
+			System.out.println("Socios modalidade idoso: " + idoso);
+		}
+		//for (Socio espertos : listaSociosEspertos) {
+			System.out.println("Socios com dupla entrada: " + catraca.filaSociosEspertos.size());
+		//}
 		long depois = System.currentTimeMillis();
 		double tempo = (depois - antes);
-		//QueueLinked<Integer> listaEspertos = catraca.listaEspertos();		
-		//System.out.println("Total de espertos: " + listaEspertos2.size());		
-		//Exibe os socois que tentaram entrar mais de uma vez 
-		//  for (Socio i : listaEspertos2) 
-		//	 System.out.println("Espertos " + i);		 
-		System.out.println("Total de operações de acesso: "
-				+ catraca.getContador());
+		/*
+		 * Retorna o total de operações de acesso (contador)
+		 * System.out.println("Total de operações de acesso: " +
+		 * catraca.getContador());
+		 */
+
+		/*
+		 * Retorna o tempo de execução em milisegundos
+		 */
 		System.out.println("Tempo de processamento: " + tempo + " ms");
-		//catraca.entrar(s1);
-		//catraca.entrar(s1);
-		//System.out.println("Verifica se o socio de matricula 1010 entrou : " + catraca.verificaEntrada(1010));
-		//System.out.println("Verifica dupla entrada do socio de matricula 1010 : " + catraca.verificaDuplaEntrada(1010));
+		
+		/* Método indexOf não está funcionando corretamente
+		 * System.out.println("Teste indexOf: " + catraca.sociosComuns.indexOf(s1));
+		 */
+		
+		/*
+		 * Método public E get(int index) está funcionando
+		 * System.out.println("Teste get: "+ catraca.listaSociosEstudantes().get(0));
+		 */
+		
+		/*
+		 * Método public boolean verificaEntradaV2(Socio socio1) está funcionando 
+		 */
+		System.out.println("Verifica se o socio de matricula 3030 entrou: "+ catraca.verificaEntrada(s1));
+
+		/*  
+		 * Método public boolean verificaDuplaEntrada(Socio matricula) está funcionando
+		 */
+		System.out.println("Verifica dupla entrada do socio de matricula 1010 : "+ catraca.verificaDuplaEntrada(s1));
+
+		/*
+		 * Métodos que utilizam int como parametro
+		 */
+		
+		/*
+		 * Exibe os socois que tentaram entrar mais de uma vez for (Socio i :
+		 * listaEspertos2) System.out.println("Espertos " + i);
+		 */
+		// QueueLinked<Integer> listaEspertos = catraca.listaEspertos();
+		// System.out.println("Total de espertos: " + listaEspertos2.size());
 	}
 }

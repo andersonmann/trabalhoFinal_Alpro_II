@@ -9,4 +9,16 @@ public interface QueueTADEx<E> extends QueueTAD<E> {
 	int indexOf(E e);
 
 	boolean contains(E e);
+
+	int contaOcorrencias(E element);
+
+	void retiraRepetidos();
+
+	boolean remove(E element);
+
+	E removeFirst();
+
+	E removeLast();
+
+	E remove(int index);
 }

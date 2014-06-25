@@ -4,64 +4,78 @@ public class Catraca<E> extends QueueLinkedEx<E> {
 
 	// protected QueueLinkedEx<Integer> sociosEntraram;
 	// protected QueueLinkedEx<Integer> sociosEspertos;
-	protected QueueLinkedEx<Socio> sociosComuns;
-	protected QueueLinkedEx<Socio> SocioEstudante;
-	protected QueueLinkedEx<Socio> socioIdoso;
-	protected QueueLinkedEx<Socio> sociosEspertos2;
-	public Socio socio;
+	protected QueueLinkedEx<Socio> filaSociosComuns;
+	protected QueueLinkedEx<Socio> filaSociosEstudantes;
+	protected QueueLinkedEx<Socio> filaSociosIdosos;
+	protected QueueLinkedEx<Socio> filaSociosEspertos;
+	Socio socio;
 	private long contador;
 
 	public Catraca() {
 		// sociosEntraram = new QueueLinkedEx<Integer>();
 		// sociosEspertos = new QueueLinkedEx<Integer>();
-		sociosComuns = new QueueLinkedEx<Socio>();
-		SocioEstudante = new QueueLinkedEx<Socio>();
-		socioIdoso = new QueueLinkedEx<Socio>();
-		sociosEspertos2 = new QueueLinkedEx<Socio>();
+		filaSociosComuns = new QueueLinkedEx<Socio>();
+		filaSociosEstudantes = new QueueLinkedEx<Socio>();
+		filaSociosIdosos = new QueueLinkedEx<Socio>();
+		filaSociosEspertos = new QueueLinkedEx<Socio>();
 		contador = 0;
 	}
 
 	public void entrar(Socio matricula) {
 		if (verificaModalidade(matricula) == Modalidade.COMUM) {
-			if (verificaEntradaV2(matricula) == true) {
-				sociosEspertos2.add(matricula);
+			if (verificaEntrada(matricula) == false) {
+				filaSociosComuns.add(matricula);
+			} else {
+				filaSociosEspertos.add(matricula);
 			}
-			sociosComuns.add(matricula);
 		}
 		if (verificaModalidade(matricula) == Modalidade.ESTUDANTE) {
-			if (verificaEntradaV2(matricula) == true) {
-				sociosEspertos2.add(matricula);
+			if (verificaEntrada(matricula) == false) {
+				filaSociosEstudantes.add(matricula);
+			} else {
+				filaSociosEspertos.add(matricula);
 			}
-			SocioEstudante.add(matricula);
 		}
-		if (verificaEntradaV2(matricula) == true) {
-			sociosEspertos2.add(matricula);
+		if (verificaModalidade(matricula) == Modalidade.IDOSO) {
+			if (verificaEntrada(matricula) == false) {
+				filaSociosIdosos.add(matricula);
+			} else {
+				filaSociosEspertos.add(matricula);
+			}
 		}
-		socioIdoso.add(matricula);
 	}
 
-	public boolean verificaEntradaV2(Socio socio1) {
+	public boolean verificaEntrada(Socio socio1) {
 		if (verificaModalidade(socio1) == Modalidade.COMUM) {
-			if(sociosComuns.contains(socio1)){			
+			for (Socio socioComum : filaSociosComuns) {
+				if (socioComum == socio1)
+					return true;
+			}
+			return false;
+		}
+		if (verificaModalidade(socio1) == Modalidade.ESTUDANTE) {
+			for (Socio socioEstudante : filaSociosEstudantes) {
+				if (socioEstudante == socio1) {
 					return true;
 				}
 			}
+		}
+		for (Socio socio : filaSociosIdosos) {
+			if (socio == socio1) {
+				return true;
+			}
+		}
 		return false;
-		}
-		/*if (verificaModalidade(matricula) == Modalidade.ESTUDANTE) {
-			for (Socio socioEstudante : SocioEstudante) {
-				if (socioEstudante == matricula) {
-					return true;
-				}
-			}
-		}
-		for (Socio socio : socioIdoso) {
+	}
+
+	public boolean verificaDuplaEntrada(Socio matricula) {
+		for (Socio socio : filaSociosEspertos) {
 			if (socio == matricula) {
 				return true;
 			}
 		}
 		return false;
-	}*/
+	}
 
 	public Modalidade verificaModalidade(Socio socio) {
 		if (socio.getModalidade() == Modalidade.COMUM) {
@@ -73,8 +87,28 @@ public class Catraca<E> extends QueueLinkedEx<E> {
 		return Modalidade.IDOSO;
 	}
 
+	public long getContador() {
+		return contador;
+	}
+
+	public QueueLinkedEx<Socio> listaSociosComuns() {
+		return filaSociosComuns;
+	}
+
+	public QueueLinkedEx<Socio> listaSociosEstudantes() {
+		return filaSociosEstudantes;
+	}
+
+	public QueueLinkedEx<Socio> listaSociosIdosos() {
+		return filaSociosIdosos;
+	}
+
+	public QueueLinkedEx<Socio> listaEspertos() {
+		return filaSociosEspertos;
+	}
+
 	/*
-	 * Métodos que utilizam parametro int
+	 * Métodos que utilizam int como parametro
 	 */
 
 	/*
@@ -90,17 +124,6 @@ public class Catraca<E> extends QueueLinkedEx<E> {
 	 * sociosEspertos) { contador++; if (socio == matricula) { return true; } }
 	 * return false; }
 	 */
-	public long getContador() {
-		return contador;
-	}
-
-	public QueueLinked<Socio> listaEspertos2() {
-		return sociosEspertos2;
-	}
-
-	public QueueLinkedEx<Socio> listaSociosComuns() {
-		return sociosComuns;
-	}
 
 	/*
 	 * public QueueLinked<Integer> listaEspertos() { return sociosEspertos; }
