@@ -3,6 +3,7 @@ package supermercado_mann;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+
 public class QueueLinked<E> implements QueueTAD<E>, Iterable<E> {
 	static final class Node<E> {
 		public E element;
@@ -95,6 +96,19 @@ public class QueueLinked<E> implements QueueTAD<E>, Iterable<E> {
                 throw new UnsupportedOperationException();
             }
         });
+	}
+	
+	@Override
+	public String toString() {
+		StringBuffer aux = new StringBuffer();
+		Node<E> current = head;
+		aux.append("");
+		while (current != null) {
+			aux.append(current.element + " \n");
+			current = current.next;
+		}
+		aux.append(""); 
+		return aux.toString();
 	}
 
 }

@@ -21,4 +21,6 @@ public interface QueueTADEx<E> extends QueueTAD<E> {
 	E removeLast();
 
 	E remove(int index);
+
+	QueueTADEx<E> uniao(QueueTADEx<E> lista);
 }

@@ -143,4 +143,16 @@ public class QueueLinkedEx<E> extends QueueLinked<E> implements QueueTADEx<E> {
 			aux = aux.next; // avança para o proximo nodo
 		}
 	}
+
+	@Override
+	public QueueTADEx<E> uniao(QueueTADEx<E> lista) {
+		Node<E> aux = head; // Nodo auxiliar que inicia no primeiro elemento da
+							// lista
+		while (aux != null) { // percorre a lista até o final
+			lista.add(aux.element);
+			aux = aux.next; // avança para o proximo nodo
+		}
+		return lista; // retorna a lista contendo os elementos de ambas as
+						// listas
+	}
 }

@@ -1,7 +1,7 @@
 package supermercado_mann;
 
 import java.io.IOException;
-import java.util.Random;
+//import java.util.Random;
 
 /*//Como melhorar o algoritmo?
  * 
@@ -33,8 +33,8 @@ public class AppCatraca {
 		 * for (int i = 0; i < 100000; i++) { int matricula =
 		 * random.nextInt(100000) + 1; catraca.entra(matricula); }
 		 */
-		catraca.entrar(s1); catraca.entrar(s1); catraca.entrar(s2);
-		catraca.entrar(s3); catraca.entrar(s4); catraca.entrar(s5);
+		catraca.entrarNaFilaCorreta(s1); catraca.entrarNaFilaCorreta(s1); catraca.entrarNaFilaCorreta(s2);
+		catraca.entrarNaFilaCorreta(s3); catraca.entrarNaFilaCorreta(s4); catraca.entrarNaFilaCorreta(s5);
 		QueueLinkedEx<Socio> listaSociosComuns = catraca.listaSociosComuns();
 		QueueLinkedEx<Socio> listaSociosEstudantes = catraca.listaSociosEstudantes();
 		QueueLinkedEx<Socio> listaSociosIdosos = catraca.listaSociosIdosos();
@@ -88,6 +88,8 @@ public class AppCatraca {
 		 * Método public boolean verificaDuplaEntrada(Socio matricula) está funcionando
 		 */
 		System.out.println("Verifica dupla entrada do socio de matricula 1010 : "+ catraca.verificaDuplaEntrada(s1));
+				
+		System.out.println("União das filas \"Estudantes\" e \"Comuns\":\n" + listaSociosComuns.uniao(listaSociosEstudantes));
 
 		/* Métodos que utilizam int como parametro
 		 */		

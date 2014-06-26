@@ -6,6 +6,7 @@ package supermercado_mann;
  * Estudar formas de criar inumeros Sócios.
  * Avaliar quais métodos podem ser alterados e passarem a utilizar a matricula como parametro
  * Criar um modo eficaz de contar as operações realizadas * 
+ * Alterar o método (entrar)
  */
 
 public class Catraca<E> extends QueueLinkedEx<E> {
@@ -29,8 +30,12 @@ public class Catraca<E> extends QueueLinkedEx<E> {
 		publicoTotal =  new QueueLinkedEx<Socio>();		
 		contador = 0;
 	}
+	
+	public void entrarNoEstadio(QueueLinkedEx<Socio> lista){
+		
+	}	
 
-	public void entrar(Socio matricula) {
+	public void entrarNaFilaCorreta(Socio matricula) {
 		if (verificaModalidade(matricula) == Modalidade.COMUM) {
 			if (verificaEntrada(matricula) == false) {
 				filaSociosComuns.add(matricula);
@@ -68,9 +73,10 @@ public class Catraca<E> extends QueueLinkedEx<E> {
 					return true;
 				}
 			}
+			return false;
 		}
-		for (Socio socio : filaSociosIdosos) {
-			if (socio == socio1) {
+		for (Socio socioIdoso : filaSociosIdosos) {
+			if (socioIdoso == socio1) {
 				return true;
 			}
 		}
