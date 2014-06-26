@@ -57,7 +57,7 @@ public class AppCatraca {
 		/*
 		 * Método que retorna o public total public int publicTotal() 
 		 */
-		System.out.println("Publico total: " + catraca.publicTotal());	
+		System.out.println("Publico total dentro do estádio: " + catraca.publicTotal());	
 		
 		/*
 		 * Retorna o total de operações de acesso (contador)
@@ -68,7 +68,7 @@ public class AppCatraca {
 		/*
 		 * Retorna o tempo de execução em milisegundos
 		 */
-		//System.out.println("Tempo de processamento: " + tempo + " ms");
+		System.out.println("Tempo de processamento: " + tempo + " ms");
 		
 		/* Método indexOf não está funcionando corretamente
 		 * System.out.println("Teste indexOf: " + catraca.sociosComuns.indexOf(s1));
