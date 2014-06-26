@@ -19,7 +19,7 @@ public class AppCatraca {
 		Reader<Jogo> reader = new Reader<>();
 		reader.carregaJogos();
 		// Exibe os dados dos jogos
-		// System.out.println(reader.toString());
+		 System.out.println(reader.toString());
 		Socio s1 = new Socio("Anderson", 1010, Categoria.NADA_VAI_NOS_SEPARAR,Modalidade.ESTUDANTE);
 		Socio s2 = new Socio("Eduardo", 2020, Categoria.CAMPEAO_DO_MUNDO,Modalidade.ESTUDANTE);
 		Socio s3 = new Socio("Julio", 3030, Categoria.CAMPEAO_DO_MUNDO,Modalidade.IDOSO);
