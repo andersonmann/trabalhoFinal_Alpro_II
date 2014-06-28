@@ -9,7 +9,7 @@ import java.io.IOException;
  * - Manter a lista ordenada e buscar de forma inteligente
  * 
  */
-public class AppCatraca {
+public class App {
 	/**
 	 * @param args
 	 * @throws IOException
