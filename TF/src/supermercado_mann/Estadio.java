@@ -7,14 +7,14 @@ package supermercado_mann;
  * @author Anderson_M_Mann
  * 
  */
-public class Estadio {
-	protected QueueLinkedEx<Socio> socios;
+public class Estadio<E> extends QueueLinkedEx<E>{
+	public QueueLinkedEx<Socio> socios;
 	
 	/*
 	 * Construtor 
 	 */
 	public Estadio(){
-		socios = new QueueLinkedEx<>();
+		socios = new QueueLinkedEx<Socio>();
 	}
 	
     /**
@@ -22,7 +22,7 @@ public class Estadio {
      * @return QueueLinkedEx de socios cadastrados 
      */
 	
-	public QueueLinkedEx<Socio> getSocios(){
+	public QueueLinkedEx<Socio> listaDeSocios(){
 		return socios;
 	}
 

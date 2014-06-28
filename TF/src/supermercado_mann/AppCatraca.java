@@ -16,29 +16,36 @@ public class AppCatraca {
 	 * @throws EstadioException
 	 */
 	public static void main(String[] args) throws IOException, EstadioException {
+		long antes = System.currentTimeMillis();		
 		Reader<Jogo> reader = new Reader<>();
 		reader.carregaJogos();
 		// Exibe os dados dos jogos
-		 System.out.println(reader.toString());
+		//System.out.println(reader.toString());
 		Socio s1 = new Socio("Anderson", 1010, Categoria.NADA_VAI_NOS_SEPARAR,Modalidade.ESTUDANTE);
 		Socio s2 = new Socio("Eduardo", 2020, Categoria.CAMPEAO_DO_MUNDO,Modalidade.ESTUDANTE);
 		Socio s3 = new Socio("Julio", 3030, Categoria.CAMPEAO_DO_MUNDO,Modalidade.IDOSO);
 		Socio s4 = new Socio("Amauri", 4040, Categoria.NADA_VAI_NOS_SEPARAR,Modalidade.ESTUDANTE);
 		Socio s5 = new Socio("Ricardo", 5050, Categoria.CAMPEAO_DO_MUNDO, Modalidade.COMUM);
 		
-		Catraca<Object> catraca = new Catraca<Object>();
-		long antes = System.currentTimeMillis();
-		 
-		/* Random random = new Random();
-		 * for (int i = 0; i < 100000; i++) { int matricula =
-		 * random.nextInt(100000) + 1; catraca.entra(matricula); }
-		 */
-		catraca.entrarNaFilaCorreta(s1); catraca.entrarNaFilaCorreta(s1); catraca.entrarNaFilaCorreta(s2);
-		catraca.entrarNaFilaCorreta(s3); catraca.entrarNaFilaCorreta(s4); catraca.entrarNaFilaCorreta(s5);
+		Estadio<Socio> estadio = new Estadio<>();
+		Catraca<Socio> catraca = new Catraca<>();		
+		QueueLinkedEx<Socio> lista = estadio.listaDeSocios();
 		QueueLinkedEx<Socio> listaSociosComuns = catraca.listaSociosComuns();
 		QueueLinkedEx<Socio> listaSociosEstudantes = catraca.listaSociosEstudantes();
 		QueueLinkedEx<Socio> listaSociosIdosos = catraca.listaSociosIdosos();
 		QueueLinkedEx<Socio> listaSociosEspertos = catraca.listaEspertos();
+		
+		lista.add(s1); lista.add(s2); lista.add(s3); lista.add(s4); lista.add(s5); 		
+		catraca.entrarNaFilaCorreta(s1); catraca.entrarNaFilaCorreta(s1); catraca.entrarNaFilaCorreta(s2);
+		catraca.entrarNaFilaCorreta(s3); catraca.entrarNaFilaCorreta(s4); catraca.entrarNaFilaCorreta(s5);						 
+		/* Random random = new Random();
+		 * for (int i = 0; i < 100000; i++) { int matricula =
+		 * random.nextInt(100000) + 1; catraca.entra(matricula); }
+		 */
+		for(Socio sociosCadastrados : lista){
+			System.out.println("Socios cadastrados: "+ sociosCadastrados);	
+		}
+		System.out.println("");
 		for (Socio comum : listaSociosComuns) {
 			System.out.println("Socios modalidade comum: " + comum);
 		}
