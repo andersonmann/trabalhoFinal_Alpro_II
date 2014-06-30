@@ -97,6 +97,9 @@ public class App {
 		System.out.println("Verifica dupla entrada do socio de matricula 1010 : "+ catraca.verificaDuplaEntrada(s1));
 				
 		System.out.println("União das filas \"Estudantes\" e \"Comuns\":\n" + listaSociosComuns.uniao(listaSociosEstudantes));
+		
+		//System.out.println("Get matricula: " + estadio.getSocio(s1));
+		System.out.println("Get matricula: " + estadio.getSocio(1010));
 
 		/* Métodos que utilizam int como parametro
 		 */		
