@@ -23,7 +23,7 @@ public class Estadio<E> extends QueueLinkedEx<E> {
 	 * @return QueueLinkedEx de socios cadastrados
 	 */
 
-	public QueueLinkedEx<Socio> listaDeSocios() {
+	public  QueueLinkedEx<Socio> listaDeSocios() {
 		return socios;
 	}
 

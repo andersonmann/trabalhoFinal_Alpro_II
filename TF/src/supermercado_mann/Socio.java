@@ -1,17 +1,24 @@
 package supermercado_mann;
 
-public class Socio {
-	private String nome;
-	private int matricula;
-	private Categoria categoria;
-	private Modalidade modalidade;
-	private double valorMensalidade;
+import java.util.Random;
 
-	public Socio(String nome, int matricula, Categoria categoria, Modalidade modalidade)
-			throws EstadioException { 
+public class Socio {
+	protected String nome;
+	protected int matricula;
+	protected Categoria categoria;
+	protected Modalidade modalidade;
+	protected double valorMensalidade;
+	
+	private int instanteChegada;
+	private int tempoAtendimento; // quantidade de tempo que resta para o cliente no caixa
+	private static final Random gerador = new Random();
+	public static final int tempoMinAtendimento = 5; // original era 5
+	public static final int tempoMaxAtendimento = 10; // original era 10
+
+	
+	public Socio(String nome, int matricula, Categoria categoria,Modalidade modalidade, int chegada) throws EstadioException {
 		checkNome(nome);
-		checkMatricula(matricula);
-		// checkValor(valorMensalidade);
+		checkMatricula(matricula);		
 		if (categoria.equals(Categoria.CAMPEAO_DO_MUNDO)) {
 			setCategoria(categoria);
 			valorMensalidade = 40;
@@ -19,15 +26,17 @@ public class Socio {
 		if (categoria.equals(Categoria.NADA_VAI_NOS_SEPARAR)) {
 			setCategoria(categoria);
 			valorMensalidade = 60;
-		}
-		/*
-		 * if (categoria.equals(Categoria.CAMPEAO_DO_MUNDO)) { valorMensalidade
-		 * = 40; } if (categoria.equals(Categoria.NADA_VAI_NOS_SEPARAR)) {
-		 * valorMensalidade = 60; }
-		 */
+		}		
+		
+		instanteChegada = chegada;
+		tempoAtendimento = gerador.nextInt(tempoMaxAtendimento - tempoMinAtendimento + 1) + tempoMinAtendimento; // gera valores entre 5 e 20
 		this.nome = nome;
 		this.matricula = matricula;
 		this.modalidade = modalidade;
+	}	
+
+	public Socio(int quantidadeGerada, int tempo) {
+		
 	}
 
 	private void checkNome(String none) throws EstadioException {
@@ -41,6 +50,23 @@ public class Socio {
 			throw new EstadioException("A matricula não pode ser null.");
 		}
 	}
+	
+	public int getInstanteChegada()
+	{
+	    return instanteChegada;
+	}
+	
+	public void decrementarTempoAtendimento()
+	{
+	    tempoAtendimento--;
+	}
+	
+	public int getTempoAtendimento()
+	{
+	    return tempoAtendimento;
+	}
+	
+
 	/*
 	 * private void checkValor(double valorMensalidade) throws EstadioException
 	 * { if (valorMensalidade <= 0) { throw new
@@ -83,7 +109,7 @@ public class Socio {
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
-	
+
 	/**
 	 * @return the modalidade
 	 */
@@ -92,7 +118,8 @@ public class Socio {
 	}
 
 	/**
-	 * @param modalidade the modalidade to set
+	 * @param modalidade
+	 *            the modalidade to set
 	 */
 	public void setModalidade(Modalidade modalidade) {
 		this.modalidade = modalidade;
@@ -117,6 +144,7 @@ public class Socio {
 	public String toString() {
 		return String
 				.format("Dados do socio [nome= %s, matricula= %s, categoria= %s, modaliade= %s, valorMensaliade= %s]",
-						nome, matricula, categoria, modalidade, valorMensalidade);
+						nome, matricula, categoria, modalidade,
+						valorMensalidade);
 	}
 }

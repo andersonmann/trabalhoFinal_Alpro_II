@@ -17,8 +17,11 @@ public class Catraca<E> extends QueueLinkedEx<E> {
 	protected QueueLinkedEx<Socio> filaSociosIdosos;
 	protected QueueLinkedEx<Socio> filaSociosEspertos;
 	protected QueueLinkedEx<Socio> publicoTotal; // Criar método que retorne todos os socios que entraram	
-	Socio socio;
-	private long contador;
+	private long contador;	
+	//Socio socio;	
+	
+	private Socio socioAtual;
+	private int numeroAtendidos;
 
 	public Catraca() {
 		// sociosEntraram = new QueueLinkedEx<Integer>();
@@ -27,13 +30,44 @@ public class Catraca<E> extends QueueLinkedEx<E> {
 		filaSociosEstudantes = new QueueLinkedEx<Socio>();
 		filaSociosIdosos = new QueueLinkedEx<Socio>();
 		filaSociosEspertos = new QueueLinkedEx<Socio>();
-		publicoTotal =  new QueueLinkedEx<Socio>();		
+		publicoTotal =  new QueueLinkedEx<Socio>();			
 		contador = 0;
+		
+		socioAtual = null;
+	    numeroAtendidos = 0;
 	}
 	
 	public void entrarNoEstadio(QueueLinkedEx<Socio> lista){
 		
-	}	
+	}
+	
+	public void atenderNovoSocio(Socio socio)
+	{
+		socioAtual = socio;
+	}
+	
+	public Socio dispensarSocioAtual()
+	{
+	    Socio socio = socioAtual;
+	    socioAtual = null;
+	    numeroAtendidos++;
+	    return socio;
+	}
+	
+	public boolean estaVazio()
+	{
+	    return (socioAtual == null);
+	}
+	
+	public Socio getSocioAtual()
+	{
+	    return socioAtual;
+	}
+	
+	public int getNumeroAtendidos()
+	{
+	    return numeroAtendidos;
+	}
 
 	public void entrarNaFilaCorreta(Socio matricula) {
 		if (verificaModalidade(matricula) == Modalidade.COMUM) {
@@ -90,7 +124,7 @@ public class Catraca<E> extends QueueLinkedEx<E> {
 			}
 		}
 		return false;
-	}
+	}		
 
 	public Modalidade verificaModalidade(Socio socio) {
 		if (socio.getModalidade() == Modalidade.COMUM) {

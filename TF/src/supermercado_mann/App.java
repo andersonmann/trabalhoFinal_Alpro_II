@@ -21,11 +21,11 @@ public class App {
 		reader.carregaJogos();
 		// Exibe os dados dos jogos
 		System.out.println(reader.toString());
-		Socio s1 = new Socio("Anderson", 1010, Categoria.NADA_VAI_NOS_SEPARAR,Modalidade.ESTUDANTE);
-		Socio s2 = new Socio("Eduardo", 2020, Categoria.CAMPEAO_DO_MUNDO,Modalidade.ESTUDANTE);
-		Socio s3 = new Socio("Julio", 3030, Categoria.CAMPEAO_DO_MUNDO,Modalidade.IDOSO);
-		Socio s4 = new Socio("Amauri", 4040, Categoria.NADA_VAI_NOS_SEPARAR,Modalidade.ESTUDANTE);
-		Socio s5 = new Socio("Ricardo", 5050, Categoria.CAMPEAO_DO_MUNDO, Modalidade.COMUM);
+		Socio s1 = new Socio("Anderson", 1010, Categoria.NADA_VAI_NOS_SEPARAR,Modalidade.ESTUDANTE,10);
+		Socio s2 = new Socio("Eduardo", 2020, Categoria.CAMPEAO_DO_MUNDO,Modalidade.ESTUDANTE,15);
+		Socio s3 = new Socio("Julio", 3030, Categoria.CAMPEAO_DO_MUNDO,Modalidade.IDOSO,20);
+		Socio s4 = new Socio("Amauri", 4040, Categoria.NADA_VAI_NOS_SEPARAR,Modalidade.ESTUDANTE,25);
+		Socio s5 = new Socio("Ricardo", 5050, Categoria.CAMPEAO_DO_MUNDO, Modalidade.COMUM,30);
 		
 		Estadio<Socio> estadio = new Estadio<>();
 		Catraca<Socio> catraca = new Catraca<>();		
