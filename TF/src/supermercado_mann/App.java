@@ -28,22 +28,28 @@ public class App {
 		Socio s5 = new Socio("Ricardo", 5050, Categoria.CAMPEAO_DO_MUNDO, Modalidade.COMUM,30);
 		
 		Estadio<Socio> estadio = new Estadio<>();
-		Catraca<Socio> catraca = new Catraca<>();		
-		QueueLinkedEx<Socio> lista = estadio.listaDeSocios();
+		Catraca<Socio> catraca = new Catraca<>(1);
+		QueueLinkedEx<Socio> sociosCadastrados = estadio.listaDeSocios();
 		QueueLinkedEx<Socio> listaSociosComuns = catraca.listaSociosComuns();
 		QueueLinkedEx<Socio> listaSociosEstudantes = catraca.listaSociosEstudantes();
 		QueueLinkedEx<Socio> listaSociosIdosos = catraca.listaSociosIdosos();
 		QueueLinkedEx<Socio> listaSociosEspertos = catraca.listaEspertos();
+		QueueLinkedEx<Socio> sociosEntraram = catraca.publicoTotal(); 
 		
-		lista.add(s1); lista.add(s2); lista.add(s3); lista.add(s4); lista.add(s5); 		
+		sociosCadastrados.add(s1); sociosCadastrados.add(s2); sociosCadastrados.add(s3); sociosCadastrados.add(s4); sociosCadastrados.add(s5); 		
 		catraca.entrarNaFilaCorreta(s1); catraca.entrarNaFilaCorreta(s1); catraca.entrarNaFilaCorreta(s2);
-		catraca.entrarNaFilaCorreta(s3); catraca.entrarNaFilaCorreta(s4); catraca.entrarNaFilaCorreta(s5);						 
+		catraca.entrarNaFilaCorreta(s3); catraca.entrarNaFilaCorreta(s4); catraca.entrarNaFilaCorreta(s5);
+		
+		catraca.entrarNoEstadioSociosComuns(listaSociosComuns);
+		catraca.entrarNoEstadioSociosEstudantes(listaSociosEstudantes);
+		catraca.entrarNoEstadioSociosIdosos(listaSociosIdosos);
+		
 		/* Random random = new Random();
 		 * for (int i = 0; i < 100000; i++) { int matricula =
 		 * random.nextInt(100000) + 1; catraca.entra(matricula); }
 		 */
-		for(Socio sociosCadastrados : lista){
-			System.out.println("Socios cadastrados: "+ sociosCadastrados);	
+		for(Socio socios : sociosCadastrados){
+			System.out.println("Socios cadastrados: "+ socios);	
 		}
 		System.out.println("");
 		for (Socio comum : listaSociosComuns) {
@@ -55,6 +61,9 @@ public class App {
 		for (Socio idoso : listaSociosIdosos) {
 			System.out.println("Socios modalidade idoso: " + idoso);
 		}
+		for (Socio entratam : sociosEntraram) {
+			System.out.println("Socios que entraram: " + entratam);
+		}				
 		for (Socio espertos : listaSociosEspertos) {
 			System.out.println("Socios com dupla entrada: " + espertos);
 		}

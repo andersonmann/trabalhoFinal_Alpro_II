@@ -10,11 +10,12 @@ package supermercado_mann;
 public class AppSimulacaoEstadio {
 
 	/**
+	 * @param <E>
 	 * @param args
 	 * @throws EstadioException 
 	 */
-	public static void main(String[] args) throws EstadioException {
-		SimulacaoEstadio sim = new SimulacaoEstadio(true);
+	public static <E> void main(String[] args) throws EstadioException {
+		SimulacaoEstadio<E> sim = new SimulacaoEstadio<>(true);
         sim.simular();
         sim.imprimirResultados();
 

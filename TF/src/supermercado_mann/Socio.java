@@ -12,8 +12,8 @@ public class Socio {
 	private int instanteChegada;
 	private int tempoAtendimento; // quantidade de tempo que resta para o cliente no caixa
 	private static final Random gerador = new Random();
-	public static final int tempoMinAtendimento = 5; // original era 5
-	public static final int tempoMaxAtendimento = 10; // original era 10
+	public static final int tempoMinAtendimento = 5; 
+	public static final int tempoMaxAtendimento = 10;
 
 	
 	public Socio(String nome, int matricula, Categoria categoria,Modalidade modalidade, int chegada) throws EstadioException {

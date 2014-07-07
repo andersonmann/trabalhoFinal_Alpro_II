@@ -16,14 +16,15 @@ public class Catraca<E> extends QueueLinkedEx<E> {
 	protected QueueLinkedEx<Socio> filaSociosEstudantes;
 	protected QueueLinkedEx<Socio> filaSociosIdosos;
 	protected QueueLinkedEx<Socio> filaSociosEspertos;
-	protected QueueLinkedEx<Socio> publicoTotal; // Criar método que retorne todos os socios que entraram	
+	protected QueueLinkedEx<Socio> publicoTotal;	
 	private long contador;	
-	//Socio socio;	
+	Socio socio;	
 	
+	private int numero;
 	private Socio socioAtual;
 	private int numeroAtendidos;
 
-	public Catraca() {
+	public Catraca(int numero) {
 		// sociosEntraram = new QueueLinkedEx<Integer>();
 		// sociosEspertos = new QueueLinkedEx<Integer>();
 		filaSociosComuns = new QueueLinkedEx<Socio>();
@@ -33,13 +34,28 @@ public class Catraca<E> extends QueueLinkedEx<E> {
 		publicoTotal =  new QueueLinkedEx<Socio>();			
 		contador = 0;
 		
+		this.setNumero(numero);
 		socioAtual = null;
 	    numeroAtendidos = 0;
 	}
 	
-	public void entrarNoEstadio(QueueLinkedEx<Socio> lista){
-		
+	public void entrarNoEstadioSociosComuns(QueueLinkedEx<Socio> s){		
+		for(Socio sociosComuns: filaSociosComuns){
+			publicoTotal.add(sociosComuns);
+		}		
 	}
+	
+	public void entrarNoEstadioSociosEstudantes(QueueLinkedEx<E> s){
+		for(Socio sociosEstudantes: filaSociosEstudantes){
+			publicoTotal.add(sociosEstudantes);
+		}
+	}
+	
+	public void entrarNoEstadioSociosIdosos(QueueLinkedEx<Socio> s){
+		for(Socio sociosIdosos: filaSociosIdosos){
+			publicoTotal.add(sociosIdosos);
+		}
+	}	
 	
 	public void atenderNovoSocio(Socio socio)
 	{
@@ -68,6 +84,12 @@ public class Catraca<E> extends QueueLinkedEx<E> {
 	{
 	    return numeroAtendidos;
 	}
+	
+	public int totalSociosFila() {
+	        if(socioAtual != null)
+	            return filaSociosComuns.size() + 1;
+	        return filaSociosComuns.size();
+	    }
 
 	public void entrarNaFilaCorreta(Socio matricula) {
 		if (verificaModalidade(matricula) == Modalidade.COMUM) {
@@ -156,8 +178,26 @@ public class Catraca<E> extends QueueLinkedEx<E> {
 		return filaSociosEspertos;
 	}
 	
+	public QueueLinkedEx<Socio> publicoTotal(){
+		return publicoTotal;
+	}
+	
 	public int publicTotal(){
 		return listaSociosComuns().size() + listaSociosEstudantes().size() + listaSociosIdosos().size();
+	}
+
+	/**
+	 * @return the numero
+	 */
+	public int getNumero() {
+		return numero;
+	}
+
+	/**
+	 * @param numero the numero to set
+	 */
+	public void setNumero(int numero) {
+		this.numero = numero;
 	}
 
 	/*
