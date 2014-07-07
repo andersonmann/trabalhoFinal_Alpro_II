@@ -18,7 +18,6 @@ public class AppSimulacaoEstadio {
 		SimulacaoEstadio<E> sim = new SimulacaoEstadio<>(true);
         sim.simular();
         sim.imprimirResultados();
-
 	}
 
 }

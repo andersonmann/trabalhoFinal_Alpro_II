@@ -8,6 +8,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
+ * Reader, classe que faz a leitura do arquivo.
+ * 
+ * @version 1.10 7 July 2014
  * @author Anderson_M_Mann
  * 
  */
@@ -19,6 +22,11 @@ public class Reader<E> {
 		lista = new QueueLinked<Jogo>();
 	}
 
+	/**
+	 * Method carregaJogos.
+	 * 
+	 * @return - Metodo que faz a leitura do arquivo e salva em uma lista.
+	 */
 	public void carregaJogos() throws IOException {
 		Path path = Paths.get("DadosJogos.txt");
 		try (BufferedReader br = Files.newBufferedReader(path,
@@ -38,21 +46,8 @@ public class Reader<E> {
 			System.err.println("Erro de E/S: " + e);
 		}
 		// Exibe o tamanho da lista
-		//System.out.println("Tamanho " + lista.count);
-	}
-
-	/*
-	 * public boolean contemRepetidos(String data) { for (int p = 0; p <
-	 * lista.size(); p++) { if (lista.pop(p).getData().equals(data)) { return
-	 * true; } } return false; }
-	 */
-
-	/*
-	 * public Jogo exibeJogo(String ian) throws EstadioException { for (int i =
-	 * 0; i < lista.size(); i++) { if (lista.get(i).get().equals(ian)) { return
-	 * lista.get(i); } } throw new
-	 * EstadioException("O codigo IAN fornecido não existe"); }
-	 */
+		// System.out.println("Tamanho " + lista.count);
+	}	
 
 	@Override
 	public String toString() {

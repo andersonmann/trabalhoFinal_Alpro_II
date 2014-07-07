@@ -9,29 +9,24 @@ package supermercado_mann;
  * 
  */
 public class SimulacaoEstadio<E> {
-
-	Estadio<Socio> estadio = new Estadio<>();
-	Catraca<E> catraca = new Catraca<>(1);
-
-	QueueLinkedEx<Socio> listaSociosComuns = catraca.listaSociosComuns();
-
-	private static final int totalCatracas = 10;
-	private static final int duracao = 2000;
+	private static final int totalCatracas = 5;
+	private static final int duracao = 3600;
 	private static final double probabilidadeChegada = 0.5;
-	private QueueLinkedEx<Catraca<E>> catracas;
-	private QueueTADEx<Socio> filas;
-	private Catraca<Object> catraca1;
+	private QueueLinkedEx<Catraca<Socio>> catracas;
 	private GeradorSocios geradorSocios;
 	private Acumulador statTemposEsperaFila;
 	private Acumulador statComprimentosFila;
-	private boolean trace; // valor indica se a simulacao ira imprimir
-							// passo-a-passo os resultados
+	private boolean trace;
 
+	/**
+	 * Method SimulacaoEstadio.
+	 * 
+	 * @return - Realiza a simulação de socios
+	 */
 	public SimulacaoEstadio(boolean t) {
-		filas = new QueueLinkedEx<Socio>();
-		catracas = new Catraca<>(1);
+		catracas = new QueueLinkedEx<>();
 		for (int i = 0; i < totalCatracas; i++) {
-			catracas.add((Catraca<E>) new Catraca<Object>(i + 1));
+			catracas.add(new Catraca<Socio>(i + 1));
 		}
 		geradorSocios = new GeradorSocios(probabilidadeChegada);
 		statTemposEsperaFila = new Acumulador();
@@ -39,80 +34,88 @@ public class SimulacaoEstadio<E> {
 		trace = t;
 	}
 
-	public void simular() throws EstadioException {
-		// realizar a simulacao por um certo numero de passos de duracao
+	/**
+	 * Method simular.
+	 * 
+	 * @return - Realiza a simulação de socios
+	 */
+	public void simular() throws EstadioException {		
 		for (int tempo = 0; tempo < duracao; tempo++) {
-			// verificar se um cliente chegou
+			// verificar se um socio chegou
 			if (geradorSocios.gerar()) {
-				// se cliente chegou, criar um cliente e inserir na fila da
-				// catraca
-				// Socio socio = new Socio(geradorSocios.getQuantidadeGerada(),
-				// tempo);
-				Socio socio = new Socio("Anderson", 1010,
-						Categoria.NADA_VAI_NOS_SEPARAR, Modalidade.ESTUDANTE, 3);
-				Catraca<E> catracaMenorFila = (Catraca<E>) catraca1.get(1);
-				for (Catraca<E> catraca : catracas) {
+				// se socio chegou, criar um socio e inserir na fila
+				Socio socio = new Socio(geradorSocios.getQuantidadeGerada(),
+						tempo);
+				Catraca<Socio> catracaMenorFila = catracas.get(0);
+				for (Catraca<Socio> catraca : catracas) {
 					if (catraca.totalSociosFila() < catracaMenorFila
 							.totalSociosFila()) {
 						catracaMenorFila = catraca;
 					}
 				}
-				catracaMenorFila.entrarNoEstadioSociosComuns(listaSociosComuns);
-				// filas.add(socio);
-				if (trace)
-					System.out
-							.println(tempo + ": socio " + socio.getMatricula()
-									+ " " + "(" + socio.getTempoAtendimento()
-									+ " min) entra na catraca - "
-									+ catracaMenorFila.getNumero() + " ("
-									+ catracaMenorFila.totalSociosFila()
-									+ " pessoa(s)");
-				// filas.size() + " pessoa(s)");
+				catracaMenorFila.adicionaSocioFila(socio);
+				if (trace) {
+					System.out.println(tempo + ": Socio " + socio.getNumero()
+							+ " (" + socio.getTempoAtendimento()
+							+ " min) entra na fila da catraca "
+							+ catracaMenorFila.getNumero() + " ("
+							+ catracaMenorFila.totalSociosFila() + " pessoas)");
+				}
 			}
-			for (Catraca<E> catraca : catracas) {
-
-				// verificar se o caixa esta vazio
+			for (Catraca<Socio> catraca : catracas) {
+				// verificar se a catraca esta vazia
 				if (catraca.estaVazio()) {
-					// se o caixa esta vazio, atender o primeiro cliente da fila
+					// se a catraca esta vazia, atender o primeiro socio da fila
 					// se ele existir
-					if (!filas.isEmpty()) {
-						if (catraca.totalSociosFila() != 0)
-							// tirar o cliente do inicio da fila e atender no
-							// caixa
-							catraca.atenderNovoSocio(filas.remove());
+					if (catraca.totalSociosFila() != 0) {
+						// tirar o socio do inicio da fila e atender na catraca
+						catraca.atenderNovoSocio();
 						statTemposEsperaFila.adicionar(tempo
 								- catraca.getSocioAtual().getInstanteChegada());
-						if (trace)
-							System.out.println(tempo + ": socio "
-									+ catraca.getSocioAtual().getMatricula()
-									+ " chega a catraca.");
+						if (trace) {
+							System.out.println(tempo + ": Socio "
+									+ catraca.getSocioAtual().getNumero()
+									+ " chega na catraca "
+									+ catraca.getNumero());
+						}
 					}
 				} else {
-					// se o caixa ja esta ocupado, diminuir de um em um o tempo
-					// de atendimento ate chegar a zero
+					// se a catraca ja esta ocupada, diminuir de um em um o
+					// tempo de atendimento ate chegar a zero
 					if (catraca.getSocioAtual().getTempoAtendimento() == 0) {
-						if (trace)
+						if (trace) {
 							System.out.println(tempo + ": Socio "
-									+ catraca.getSocioAtual().getMatricula()
-									+ " deixa a catraca.");
+									+ catraca.getSocioAtual().getNumero()
+									+ " passa na catraca "
+									+ catraca.getNumero());
+						}
 						catraca.dispensarSocioAtual();
 					} else {
 						catraca.getSocioAtual().decrementarTempoAtendimento();
 					}
 				}
-				statComprimentosFila.adicionar(filas.size());
+				statComprimentosFila.adicionar(catraca.totalSociosFila());
 			}
 		}
 	}
 
-	public void limpar() {
-		filas = new QueueLinkedEx<Socio>();
-		catraca = new Catraca<E>(1);
+	/**
+	 * Method limpar.
+	 * 
+	 * @return - Reinicia os contadores
+	 */
+	public void limpar() {		
+		catracas = new Catraca<>();
 		geradorSocios = new GeradorSocios(probabilidadeChegada);
 		statTemposEsperaFila = new Acumulador();
 		statComprimentosFila = new Acumulador();
 	}
 
+	/**
+	 * Method imprimirResultados.
+	 * 
+	 * @return - Imprime os resultados
+	 */
 	public void imprimirResultados() {
 		System.out.println();
 		System.out.println("Resultados da Simulacao");
@@ -123,10 +126,17 @@ public class SimulacaoEstadio<E> {
 				+ Socio.tempoMinAtendimento);
 		System.out.println("Tempo de atendimento maximo:"
 				+ Socio.tempoMaxAtendimento);
-		System.out.println("Socios atendidos:" + catraca.getNumeroAtendidos());
-		System.out.println("Socios ainda na fila:" + filas.size());
-		System.out.println("Socio ainda na catraca:"
-				+ (catraca.getSocioAtual() != null));
+		for (Catraca<Socio> catraca : catracas) {
+			System.out.println("------------------------------------------");
+			System.out.println("Catraca " + catraca.getNumero());
+			System.out.println("Socios atendidos na catraca :"
+					+ catraca.getNumeroAtendidos());
+			System.out.println("Socios ainda na fila:"
+					+ catraca.totalSociosFila());
+			System.out.println("Socio ainda na catraca:"
+					+ (catraca.getSocioAtual() != null));
+		}
+		System.out.println("------------------------------------------");
 		System.out.println("Total de socios gerados:"
 				+ geradorSocios.getQuantidadeGerada());
 		System.out.println("Tempo medio de espera:"

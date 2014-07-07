@@ -5,9 +5,9 @@ package supermercado_mann;
  */
 public class SimuladorSupermercado
 {
-    public static void main(String[] args)
+    public static <E> void main(String[] args) throws EstadioException
     {
-        Simulacao sim = new Simulacao(true);
+        Simulacao<E> sim = new Simulacao<E>(true);
         sim.simular();
         sim.imprimirResultados();
     }

@@ -3,8 +3,7 @@ package supermercado_mann;
 /**
  * A classe <code>Jogo</code> representa os dados de um jogo.
  * 
- * O objeto jogo armazena..
- * 
+ * @version 1.10 7 July 2014 
  * @author anderson.mann@acad.pucrs.br
  * 
  */
@@ -68,27 +67,57 @@ public class Jogo {
 			throw new EstadioException("O valor deve ser maior do que zero!");
 		}
 	}
-
+	
+    /**
+	 * Method getCapacidade.
+	 * 
+	 * @return int - Retorna a capacidade do jogo
+	 */
 	public int getCapacidade() {
 		return capacidade;
 	}
-
+	
+	/**
+	 * Method getData.
+	 * 
+	 * @return String - Retorna a data do jogo
+	 */
 	public String getData() {
 		return data;
 	}
-
+	
+	/**
+	 * Method getLocal.
+	 * 
+	 * @return String - Retorna o loca do jogo
+	 */
 	public String getLocal() {
 		return local;
 	}
-
+	
+	/**
+	 * Method getTime1.
+	 * 
+	 * @return String - Retorna o time1 do jogo
+	 */
 	public String getTime1() {
 		return time1;
 	}
-
+	
+	/**
+	 * Method getTime2.
+	 * 
+	 * @return String - Retorna o time2 do jogo
+	 */
 	public String getTime2() {
 		return time2;
 	}
-
+	
+	/**
+	 * Method getValorIngresso.
+	 * 
+	 * @return double - Retorna o valor do ingresso do jogo
+	 */
 	public double getValorIngresso() {
 		return valorIngresso;
 	}
