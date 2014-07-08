@@ -14,6 +14,6 @@ public class EstadioException extends Exception {
 
 	public EstadioException(String msg) {
 		super(msg);
-	}
+	}	
 }
 

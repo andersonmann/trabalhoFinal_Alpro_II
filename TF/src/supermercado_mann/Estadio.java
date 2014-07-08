@@ -11,22 +11,68 @@ package supermercado_mann;
  */
 public class Estadio<E> extends QueueLinkedEx<E> {
 	protected QueueLinkedEx<Socio> socios;
-	protected QueueLinkedEx<Socio> sociosadimplentes;
-	protected QueueLinkedEx<Socio> sociosInadimplentes;
+	public QueueLinkedEx<Socio> sociosAdimplentes;
+	public QueueLinkedEx<Socio> sociosInadimplentes;
 	
 
 	public Estadio() {
 		socios = new QueueLinkedEx<Socio>();
+		sociosAdimplentes = new QueueLinkedEx<Socio>();
+		sociosInadimplentes = new QueueLinkedEx<Socio>();
 	}
-
+	
+	/**
+	 * Method pagarMensalidade.
+	 * 
+	 * @return  - Adiciona o socio na lista de socios Adimplentes
+	 */
+	public void pagarMensalidade(int matricula){
+		for(Socio socio : socios){
+			if(socio.getMatricula() == matricula){
+				sociosAdimplentes.add(socio);
+			}
+		}		
+	}
+	
+	/**
+	 * Method mensalidadeAtrasada.
+	 * 
+	 * @return  - Adiciona o socio na lista de socios Inadimplentes
+	 */
+	public void mensalidadeAtrasada(int matricula){
+		for(Socio socio: socios){
+			if(socio.getMatricula() == matricula){
+				sociosInadimplentes.add(socio);
+			}
+		}
+	}
+	
 	/**
 	 * Method listaDeSocios.
 	 * 
 	 * @return QueueLinkedEx - Lista de socios cadastrados
 	 */
-	public QueueLinkedEx<Socio> listaDeSocios() {
+	public  QueueLinkedEx<Socio> listaDeSocios() {
 		return socios;
 	}
+
+	/**
+	 * Method listaDeSociosAdimplentes.
+	 * 
+	 * @return QueueLinkedEx - Lista de socios com mensalidade em dia
+	 */
+	public  QueueLinkedEx<Socio> listaDeSociosAdimplentes() {
+		return sociosAdimplentes;
+	}
+	
+	/**
+	 * Method listaDeSociosInadimplentes.
+	 * 
+	 * @return QueueLinkedEx - Lista de socios com mensalidade atrasada
+	 */
+	public  QueueLinkedEx<Socio> listaDeSociosInadimplentes() {
+		return sociosInadimplentes;
+	}	
 
 	/**
 	 * Method getSocio.
@@ -56,9 +102,7 @@ public class Estadio<E> extends QueueLinkedEx<E> {
 		return null;
 	}
 	
-	/*public void pagarMensalidade(Socio socio1){
-		for
-	}*/
+
 
 
 }

@@ -27,7 +27,13 @@ public class App {
 		Estadio<Socio> estadio = new Estadio<>();
 		Catraca<Socio> catraca = new Catraca<>();
 		
+		//estadio.mensalidadeAtrasada(5050);
 		QueueLinkedEx<Socio> sociosCadastrados = estadio.listaDeSocios();
+		
+		/*				
+		QueueLinkedEx<Socio> sociosMensalidadeEmdia = estadio.listaDeSociosAdimplentes();		
+		QueueLinkedEx<Socio> sociosMensalidadeAtrasada = estadio.listaDeSociosInadimplentes();*/
+		
 		QueueLinkedEx<Socio> filaGeral = catraca.filaGeral;		
 		QueueLinkedEx<Socio> filaSociosComuns = catraca.listaSociosComuns();
 		QueueLinkedEx<Socio> filaSociosEstudantes = catraca.listaSociosEstudantes();
@@ -36,14 +42,18 @@ public class App {
 		QueueLinkedEx<Socio> sociosEntraram = catraca.publicoTotal(); 				
 		
 		sociosCadastrados.add(s1); sociosCadastrados.add(s2); sociosCadastrados.add(s3); sociosCadastrados.add(s4); sociosCadastrados.add(s5);sociosCadastrados.add(s6);sociosCadastrados.add(s7);
-		
+						
 		catraca.entrarNaFilaGeral(s1);catraca.entrarNaFilaGeral(s1);catraca.entrarNaFilaGeral(s2);catraca.entrarNaFilaGeral(s3);catraca.entrarNaFilaGeral(s4);catraca.entrarNaFilaGeral(s5);
 		
-		catraca.entrarNaFilaCorreta(filaGeral);		
+		catraca.entrarNaFilaCorreta(filaGeral);	
+		
+		
 		
 		catraca.entrarNoEstadioSociosComuns(filaSociosComuns);
 		catraca.entrarNoEstadioSociosEstudantes(filaSociosEstudantes);
-		catraca.entrarNoEstadioSociosIdosos(filaSociosIdosos);		
+		catraca.entrarNoEstadioSociosIdosos(filaSociosIdosos);
+		
+		
 			
 		 /*Random random = new Random();
 		  for (int i = 0; i < 50000; i++) { 
@@ -86,7 +96,11 @@ public class App {
 		for (Socio espertos : filaSociosEspertos) {
 			System.out.println("Socio que tentou entrar mais de uma vez: " + espertos);
 		}
-		System.out.println("");		
+		/*System.out.println("");	
+		for(Socio socios : sociosCadastrados){
+			System.out.println("Socios cadastrados: "+ socios);	
+		}
+		System.out.println("");*/
 		/*
 		 * Método que retorna o public total public int quantidadeTotalDeSociosQueEntraram() 
 		 */

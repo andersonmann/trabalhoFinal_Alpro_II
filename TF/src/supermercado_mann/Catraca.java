@@ -9,7 +9,7 @@ package supermercado_mann;
  */
 
 public class Catraca<E> extends QueueLinkedEx<E> {
-	private QueueLinkedEx<Socio> fila;
+	protected QueueLinkedEx<Socio> fila;
 	protected QueueLinkedEx<Socio> filaGeral;
 	protected QueueLinkedEx<Socio> filaSociosComuns;
 	protected QueueLinkedEx<Socio> filaSociosEstudantes;
@@ -22,6 +22,12 @@ public class Catraca<E> extends QueueLinkedEx<E> {
 	private Socio socioAtual;
 	private int numeroAtendidos;
 
+	/*Estadio<E> estadio;
+	QueueLinkedEx<Socio> sociosMensalidadeAtrasada = estadio.sociosInadimplentes;*/
+
+	// QueueLinkedEx<Socio> sociosMensalidaEmDia = Estadio.sociosAdimplentes;
+	// QueueLinkedEx<Socio> sociosCadastrados = Estadio.socios;
+
 	public Catraca() {
 		filaGeral = new QueueLinkedEx<>();
 		filaSociosComuns = new QueueLinkedEx<>();
@@ -29,26 +35,26 @@ public class Catraca<E> extends QueueLinkedEx<E> {
 		filaSociosIdosos = new QueueLinkedEx<>();
 		filaSociosEspertos = new QueueLinkedEx<>();
 		publicoTotal = new QueueLinkedEx<>();
-		contador = 0;		
+		contador = 0;
 	}
-	
+
 	public Catraca(int num) {
-        numero = num;
-        socioAtual = null;
-        numeroAtendidos = 0;
-        fila =  new QueueLinkedEx<Socio>();
-    }    
-    
-    /**
+		numero = num;
+		socioAtual = null;
+		numeroAtendidos = 0;
+		fila = new QueueLinkedEx<Socio>();
+	}
+
+	/**
 	 * Method atenderNovoSocio.
 	 * 
 	 * @return -Remove um socio da fila
-	 */		
-    public void atenderNovoSocio() {
-    	socioAtual = fila.remove();
-    }
-    
-    /**
+	 */
+	public void atenderNovoSocio() {
+		socioAtual = fila.remove();
+	}
+
+	/**
 	 * Method dispensarSocioAtual.
 	 * 
 	 * @return Socio -
@@ -59,7 +65,7 @@ public class Catraca<E> extends QueueLinkedEx<E> {
 		numeroAtendidos++;
 		return socio;
 	}
-	
+
 	/**
 	 * Method estaVazio.
 	 * 
@@ -68,7 +74,7 @@ public class Catraca<E> extends QueueLinkedEx<E> {
 	public boolean estaVazio() {
 		return (socioAtual == null);
 	}
-	
+
 	/**
 	 * Method getSocioAtual.
 	 * 
@@ -77,7 +83,7 @@ public class Catraca<E> extends QueueLinkedEx<E> {
 	public Socio getSocioAtual() {
 		return socioAtual;
 	}
-	
+
 	/**
 	 * Method getNumeroAtendidos.
 	 * 
@@ -86,54 +92,43 @@ public class Catraca<E> extends QueueLinkedEx<E> {
 	public int getNumeroAtendidos() {
 		return numeroAtendidos;
 	}
-  
+
 	/**
-	 * Method getNumeroAtendidos.
+	 * Method totalSociosFila.
 	 * 
-	 * @return QueueLinkedEx - Retorna os socios que ainda estao na fila.
+	 * @return int - Retorna a quantida socios que ainda estao na fila.
 	 */
 	public int totalSociosFila() {
 		if (socioAtual != null)
 			return fila.size() + 1;
 		return fila.size();
-	}  
-	
+	}
+
+	/**
+	 * Method adicionaSocioFila.
+	 * 
+	 * @return - Adiciona o socio na fila.
+	 */
 	public void adicionaSocioFila(Socio s) {
-        fila.add(s);
-    }	
-
-	/**
-	 * Method entrarNoEstadioSociosComuns
-	 * 
-	 * @return - Adiciona o socio na lista de socios que entraram no estadio.
-	 */
-	public void entrarNoEstadioSociosComuns(QueueLinkedEx<Socio> s) {
-		for (Socio sociosComuns : filaSociosComuns) {
-			publicoTotal.add(sociosComuns);
-		}
+		fila.add(s);
 	}
 
 	/**
-	 * Method entrarNoEstadioSociosEstudantes
-	 * 
-	 * @return - Adiciona o socio na lista de socios que entraram no estadio.
+	 * @return the numero
 	 */
-	public void entrarNoEstadioSociosEstudantes(QueueLinkedEx<E> s) {
-		for (Socio sociosEstudantes : filaSociosEstudantes) {
-			publicoTotal.add(sociosEstudantes);
-		}
+	public int getNumero() {
+		return numero;
 	}
 
 	/**
-	 * Method entrarNoEstadioSociosIdosos
-	 * 
-	 * @return - Adiciona o socio na lista de socios que entraram no estadio.
+	 * @param numero
+	 *            the numero to set
 	 */
-	public void entrarNoEstadioSociosIdosos(QueueLinkedEx<Socio> s) {
-		for (Socio sociosIdosos : filaSociosIdosos) {
-			publicoTotal.add(sociosIdosos);
-		}
+	public void setNumero(int numero) {
+		this.numero = numero;
 	}
+
+	// ////////////////////////////////////////////////////
 
 	/**
 	 * Method entrarNaFilaGeral
@@ -174,6 +169,44 @@ public class Catraca<E> extends QueueLinkedEx<E> {
 				}
 			}
 
+		}
+	}
+
+	/**
+	 * Method entrarNoEstadioSociosComuns
+	 * 
+	 * @return - Adiciona o socio na lista de socios que entraram no estadio.
+	 * @throws EstadioException
+	 */
+	public void entrarNoEstadioSociosComuns(QueueLinkedEx<Socio> s)
+			throws EstadioException {
+		for (Socio sociosComuns : filaSociosComuns) {
+			//if (sociosMensalidadeAtrasada.contains(sociosComuns)) {
+				//throw new EstadioException("Socio com mensalidade atrasada");
+			//}
+			publicoTotal.add(sociosComuns);
+		}
+	}
+
+	/**
+	 * Method entrarNoEstadioSociosEstudantes
+	 * 
+	 * @return - Adiciona o socio na lista de socios que entraram no estadio.
+	 */
+	public void entrarNoEstadioSociosEstudantes(QueueLinkedEx<E> s) {
+		for (Socio sociosEstudantes : filaSociosEstudantes) {
+			publicoTotal.add(sociosEstudantes);
+		}
+	}
+
+	/**
+	 * Method entrarNoEstadioSociosIdosos
+	 * 
+	 * @return - Adiciona o socio na lista de socios que entraram no estadio.
+	 */
+	public void entrarNoEstadioSociosIdosos(QueueLinkedEx<Socio> s) {
+		for (Socio sociosIdosos : filaSociosIdosos) {
+			publicoTotal.add(sociosIdosos);
 		}
 	}
 
@@ -233,15 +266,6 @@ public class Catraca<E> extends QueueLinkedEx<E> {
 			return Modalidade.ESTUDANTE;
 		}
 		return Modalidade.IDOSO;
-	}
-
-	/**
-	 * Method getContador
-	 * 
-	 * @return int - Quantidade de operações realizadas
-	 */
-	public long getContador() {
-		return contador;
 	}
 
 	/**
@@ -347,21 +371,6 @@ public class Catraca<E> extends QueueLinkedEx<E> {
 	}
 
 	/**
-	 * @return the numero
-	 */
-	public int getNumero() {
-		return numero;
-	}
-
-	/**
-	 * @param numero
-	 *            the numero to set
-	 */
-	public void setNumero(int numero) {
-		this.numero = numero;
-	}
-
-	/**
 	 * Method mediaSocios.
 	 * 
 	 * @return double - Media de socios das modalidades
@@ -409,6 +418,15 @@ public class Catraca<E> extends QueueLinkedEx<E> {
 		double total = quantidadeTotalDeSociosQueEntraram();
 		double mediaIdosos = idosos / total;
 		return mediaIdosos;
+	}
+
+	/**
+	 * Method getContador
+	 * 
+	 * @return int - Quantidade de operações realizadas
+	 */
+	public long getContador() {
+		return contador;
 	}
 
 }
