@@ -18,7 +18,12 @@ public class GeradorSocios {
 		probabilidade = p;
 		quantidadeGerada = 0;
 	}
-
+	
+    /**
+	 * Method gerar.
+	 * 
+	 * @return Boolean - Gera socios
+	 */
 	public boolean gerar() {
 		boolean gerado = false;
 		if (gerador.nextDouble() < probabilidade) {
@@ -27,7 +32,12 @@ public class GeradorSocios {
 		}
 		return gerado;
 	}
-
+	
+    /**
+	 * Method getCapacidade.
+	 * 
+	 * @return int - Retorna a capacidade do jogo
+	 */
 	public int getQuantidadeGerada() {
 		return quantidadeGerada;
 	}

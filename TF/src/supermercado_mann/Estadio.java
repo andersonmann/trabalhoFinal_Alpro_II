@@ -12,8 +12,15 @@ package supermercado_mann;
 public class Estadio<E> extends QueueLinkedEx<E> {
 	protected static QueueLinkedEx<Socio> socios;
 	protected static QueueLinkedEx<Socio> sociosAdimplentes;
-	protected QueueLinkedEx<Socio> sociosInadimplentes;
+	protected static QueueLinkedEx<Socio> sociosInadimplentes;
+	ReaderSocios<E> readerSocios;
+	QueueLinkedEx<SocioV2> sociosViaArquivo = ReaderSocios.listaSocios;
 
+	/**
+	 * Construtor
+	 * 
+	 * Metodo construtor que inicializa as filas
+	 */
 	public Estadio() {
 		socios = new QueueLinkedEx<Socio>();
 		sociosAdimplentes = new QueueLinkedEx<Socio>();
@@ -23,14 +30,15 @@ public class Estadio<E> extends QueueLinkedEx<E> {
 	/**
 	 * Method pagarMensalidade.
 	 * 
-	 * @return - Adiciona o socio na lista de socios Adimplentes
+	 * @return - Adiciona o socio na lista de socios Adimplentes, e remove da
+	 *         lista de Indadimplentes.
 	 */
-	public void pagarMensalidade(int matricula) {
+	public void pagarMensalidade(Socio socio1) {
 		for (Socio socio : socios) {
-			if (socio.getMatricula() == matricula) {
-				// sociosInadimplentes.remove(socio);
+			if (socio == socio1) {
 				sociosAdimplentes.add(socio);
 			}
+			sociosInadimplentes.remove(socio);
 		}
 	}
 
@@ -39,20 +47,14 @@ public class Estadio<E> extends QueueLinkedEx<E> {
 	 * 
 	 * @return - Adiciona o socio na lista de socios Inadimplentes
 	 */
-	public void mensalidadeAtrasada(int matricula) {
+	public void mensalidadeAtrasada(Socio socio1) {
 		for (Socio socio : socios) {
-			if (socio.getMatricula() == matricula) {
+			if (socio == socio1) {
 				sociosInadimplentes.add(socio);
 			}
 		}
 	}
 
-	public void mensalidadeAtrasada(Socio s) {
-		for (Socio socio : socios) {
-			sociosInadimplentes.add(socio);
-		}
-	}
-	
 	/**
 	 * Method listaDeSocios.
 	 * 
@@ -60,25 +62,6 @@ public class Estadio<E> extends QueueLinkedEx<E> {
 	 */
 	public QueueLinkedEx<Socio> listaDeSocios() {
 		return socios;
-	}
-	
-	/**
-	 * Method listaDeSociosAdimplentes.
-	 * 
-	 * @return QueueLinkedEx - Lista de socios com mensalidade em dia.
-	 */
-	public QueueLinkedEx<Socio> listaDeSociosAdimplentes() {
-		return sociosAdimplentes;
-	}
-
-	/**
-	 * Method listaSociosInadimplentes.
-	 * 
-	 * @return QueueLinkedEx - Lista de socios que estão com a mensalidade
-	 *         atrasada.
-	 */
-	public QueueLinkedEx<Socio> listaSociosInadimplentes() {
-		return sociosInadimplentes;
 	}
 
 	/**
@@ -91,12 +74,49 @@ public class Estadio<E> extends QueueLinkedEx<E> {
 	}
 
 	/**
+	 * Method listaDeSocios.
+	 * 
+	 * @return QueueLinkedEx - Lista de socios cadastrados via Arquivo.
+	 */
+	public QueueLinkedEx<SocioV2> listaDeSociosViaArquivo() {
+		return sociosViaArquivo;
+	}
+
+	/**
+	 * Method quantidadeSociosV2
+	 * 
+	 * @return int - Quantidade de socios cadastrados via Arquivo.
+	 */
+	public int quantidadeSociosViaArquivo() {
+		return listaDeSociosViaArquivo().size();
+	}
+
+	/**
+	 * Method listaDeSociosAdimplentes.
+	 * 
+	 * @return QueueLinkedEx - Lista de socios com mensalidade em dia.
+	 */
+	public QueueLinkedEx<Socio> listaDeSociosAdimplentes() {
+		return sociosAdimplentes;
+	}
+
+	/**
 	 * Method quantidadeSociosInadimplentes
 	 * 
 	 * @return int - Quantidade de socios que estão com a mensalidade atrasada.
 	 */
 	public int quantidadeSociosAdimplentes() {
 		return listaDeSociosAdimplentes().size();
+	}
+
+	/**
+	 * Method listaSociosInadimplentes.
+	 * 
+	 * @return QueueLinkedEx - Lista de socios que estão com a mensalidade
+	 *         atrasada.
+	 */
+	public QueueLinkedEx<Socio> listaSociosInadimplentes() {
+		return sociosInadimplentes;
 	}
 
 	/**

@@ -155,4 +155,15 @@ public class QueueLinkedEx<E> extends QueueLinked<E> implements QueueTADEx<E> {
 		return lista; // retorna a lista contendo os elementos de ambas as
 						// listas
 	}
+
+	// @Override
+	/*public void addLista(QueueTADEx<E> lista) {
+		Node<E> aux = head;
+		while (aux != null) {
+			lista.add(aux.element);
+			aux = aux.next;
+		}
+	}	*/
+	
+
 }

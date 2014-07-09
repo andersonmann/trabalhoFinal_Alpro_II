@@ -11,6 +11,7 @@ package supermercado_mann;
 public class Catraca<E> extends QueueLinkedEx<E> {
 	protected QueueLinkedEx<Socio> fila;
 	protected QueueLinkedEx<Socio> filaGeral;
+	protected QueueLinkedEx<SocioV2> filaGeralV2;
 	protected QueueLinkedEx<Socio> filaSociosComuns;
 	protected QueueLinkedEx<Socio> filaSociosEstudantes;
 	protected QueueLinkedEx<Socio> filaSociosIdosos;
@@ -21,12 +22,18 @@ public class Catraca<E> extends QueueLinkedEx<E> {
 	private int numero;
 	private Socio socioAtual;
 	private int numeroAtendidos;
-	
 	Estadio<E> estadio;
+	ReaderSocios<E> readerSocios;
+	QueueLinkedEx<SocioV2> sociosViaArquivo = ReaderSocios.listaSocios;
 	QueueLinkedEx<Socio> sociosCadastrados = Estadio.socios;
 	QueueLinkedEx<Socio> sociosMensalidaEmDia = Estadio.sociosAdimplentes;
-	//QueueLinkedEx<Socio> sociosMensalidadeAtrasada = Estadio.sociosInadimplentes;	
+	QueueLinkedEx<Socio> sociosMensalidadeAtrasada = Estadio.sociosInadimplentes;
 
+	/**
+	 * Construtor
+	 * 
+	 * Metodo construtor que inicializa as filas
+	 */
 	public Catraca() {
 		filaGeral = new QueueLinkedEx<>();
 		filaSociosComuns = new QueueLinkedEx<>();
@@ -37,6 +44,11 @@ public class Catraca<E> extends QueueLinkedEx<E> {
 		contador = 0;
 	}
 
+	/**
+	 * Construtor
+	 * 
+	 * Metodo construtor usado na simulacao
+	 */
 	public Catraca(int num) {
 		numero = num;
 		socioAtual = null;
@@ -127,8 +139,6 @@ public class Catraca<E> extends QueueLinkedEx<E> {
 		this.numero = numero;
 	}
 
-	// ////////////////////////////////////////////////////
-
 	/**
 	 * Method entrarNaFilaGeral
 	 * 
@@ -136,6 +146,19 @@ public class Catraca<E> extends QueueLinkedEx<E> {
 	 */
 	public void entrarNaFilaGeral(Socio socio) {
 		filaGeral.add(socio);
+	}
+
+	/**
+	 * Method entrarNaFilaGeralV2
+	 * 
+	 * @return - Adiciona o socio na fila geral.
+	 */
+	public void entrarNaFilaGeralV2(int matricula) {
+		for (SocioV2 socio : sociosViaArquivo) {
+			if (socio.getMatricula() == matricula) {
+				filaGeralV2.add(socio);
+			}
+		}
 	}
 
 	/**
@@ -171,14 +194,47 @@ public class Catraca<E> extends QueueLinkedEx<E> {
 		}
 	}
 
-/*	public boolean verificaMensalidade(int matricula) {
+	/**
+	 * Method entrarNaFilaCorretaV2
+	 * 
+	 * @return - Verifica a modalidade do socio e manda para a fila correta,
+	 *         tambem verifica se o socio esta tentando entrar mais de uma vez.
+	 */
+	public void entrarNaFilaCorretaV2(QueueLinkedEx<Socio> s) {
+		for (Socio socio : filaGeral) {
+			if (verificaModalidadeV2(socio).equals("COMUM")) {
+				if (verificaEntradaV2(socio) == false) {
+					filaSociosComuns.add(socio);
+				} else {
+					filaSociosEspertos.add(socio);
+				}
+			}
+			if (verificaModalidade(socio).equals("ESTUDANTE")) {
+				if (verificaEntrada(socio) == false) {
+					filaSociosEstudantes.add(socio);
+				} else {
+					filaSociosEspertos.add(socio);
+				}
+			}
+			if (verificaModalidade(socio).equals("IDOSO")) {
+				if (verificaEntrada(socio) == false) {
+					filaSociosIdosos.add(socio);
+				} else {
+					filaSociosEspertos.add(socio);
+				}
+			}
+
+		}
+	}
+
+	public boolean verificaMensalidade(Socio socio1) {
 		for (Socio socio : sociosMensalidadeAtrasada) {
-			if (socio.getMatricula() == matricula) {
+			if (socio == socio1) {
 				return true;
 			}
 		}
 		return false;
-	}*/
+	}
 
 	/**
 	 * Method entrarNoEstadioSociosComuns
@@ -190,13 +246,13 @@ public class Catraca<E> extends QueueLinkedEx<E> {
 	public void entrarNoEstadioSociosComuns(QueueLinkedEx<Socio> s)
 			throws EstadioException {
 		for (Socio sociosComuns : filaSociosComuns) {
-			//if (verificaMensalidade(sociosComuns.getMatricula()) == false) {
+			if (verificaMensalidade(sociosComuns) == false) {
 				publicoTotal.add(sociosComuns);
-			}// else
-				 //throw new EstadioException("Socio com mensalidade atrasada");
+			} else {
+				throw new EstadioException("Socio com mensalidade atrasada");
+			}
 		}
-		//throw new EstadioException("Socio com mensalidade atrasada");
-	//}
+	}
 
 	/**
 	 * Method entrarNoEstadioSociosEstudantes
@@ -207,12 +263,13 @@ public class Catraca<E> extends QueueLinkedEx<E> {
 	public void entrarNoEstadioSociosEstudantes(QueueLinkedEx<E> s)
 			throws EstadioException {
 		for (Socio sociosEstudantes : filaSociosEstudantes) {
-			//if (verificaMensalidade(sociosEstudantes.getMatricula()) == true) {
+			if (verificaMensalidade(sociosEstudantes) == false) {
 				publicoTotal.add(sociosEstudantes);
-			} // else
-				// throw new EstadioException("Socio com mensalidade atrasada");
+			} else {
+				throw new EstadioException("Socio com mensalidade atrasada");
+			}
 		}
-	//}
+	}
 
 	/**
 	 * Method entrarNoEstadioSociosIdosos
@@ -223,12 +280,13 @@ public class Catraca<E> extends QueueLinkedEx<E> {
 	public void entrarNoEstadioSociosIdosos(QueueLinkedEx<Socio> s)
 			throws EstadioException {
 		for (Socio sociosIdosos : filaSociosIdosos) {
-			//if (verificaMensalidade(sociosIdosos.getMatricula()) == true) {
+			if (verificaMensalidade(sociosIdosos) == false) {
 				publicoTotal.add(sociosIdosos);
-			} // else
-				// throw new EstadioException("Socio com mensalidade atrasada");
+			} else {
+				throw new EstadioException("Socio com mensalidade atrasada");
+			}
 		}
-	//}
+	}
 
 	/**
 	 * Method verificaEntrada
@@ -244,6 +302,35 @@ public class Catraca<E> extends QueueLinkedEx<E> {
 			return false;
 		}
 		if (verificaModalidade(socio1) == Modalidade.ESTUDANTE) {
+			for (Socio socioEstudante : filaSociosEstudantes) {
+				if (socioEstudante == socio1) {
+					return true;
+				}
+			}
+			return false;
+		}
+		for (Socio socioIdoso : filaSociosIdosos) {
+			if (socioIdoso == socio1) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Method verificaEntradaV2
+	 * 
+	 * @return Boolean - Verifica se um socio já passou pela 1ª catraca.
+	 */
+	public boolean verificaEntradaV2(Socio socio1) {
+		if (verificaModalidade(socio1).equals("COMUM")) {
+			for (Socio socioComum : filaSociosComuns) {
+				if (socioComum == socio1)
+					return true;
+			}
+			return false;
+		}
+		if (verificaModalidade(socio1).equals("ESTUDANTE")) {
 			for (Socio socioEstudante : filaSociosEstudantes) {
 				if (socioEstudante == socio1) {
 					return true;
@@ -286,6 +373,21 @@ public class Catraca<E> extends QueueLinkedEx<E> {
 			return Modalidade.ESTUDANTE;
 		}
 		return Modalidade.IDOSO;
+	}
+
+	/**
+	 * Method verificaModalidadev2
+	 * 
+	 * @return String - Verifica e retorna a modalidade de um socio.
+	 */
+	public String verificaModalidadeV2(Socio socio) {
+		if (socio.getModalidade().equals("COMUM")) {
+			return "COMUM";
+		}
+		if (socio.getModalidade().equals("ESTUDANTE")) {
+			return "ESTUDANTE";
+		}
+		return "IDOSO";
 	}
 
 	/**
@@ -343,6 +445,26 @@ public class Catraca<E> extends QueueLinkedEx<E> {
 	}
 
 	/**
+	 * Method sociosViaArquivo.
+	 * 
+	 * @return QueueLinkedEx - Lista de socios que foram cadastrados via
+	 *         arquivo.
+	 */
+	public QueueLinkedEx<SocioV2> sociosViaArquivo() {
+		return sociosViaArquivo;
+	}
+
+	/**
+	 * Method quantidadeSociosViaArquivo.
+	 * 
+	 * @return int - Quantidade de socios que foram cadastrados via arquivo.
+	 */
+
+	public int quantidadeSociosViaArquivo() {
+		return sociosViaArquivo().size();
+	}
+
+	/**
 	 * Method publicoTotal.
 	 * 
 	 * @return QueueLinkedEx - Lista de socios que tentaram entrar mais de uma
@@ -385,7 +507,7 @@ public class Catraca<E> extends QueueLinkedEx<E> {
 	 * 
 	 * @return int Quantidade de socios que passaram pela checagem da modalidade
 	 */
-	public int quantidadeTotalDeSociosQueTentaramEntrar() {
+	public int qtdTotalSociosVerificadaModalidade() {
 		return listaSociosComuns().size() + listaSociosEstudantes().size()
 				+ listaSociosIdosos().size();
 	}
