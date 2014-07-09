@@ -118,7 +118,7 @@ public class Simulacao<E> {
 		for(Caixa<Cliente> caixa: caixas)
         {
         	System.out.println("------------------------------------------");
-        	System.out.println("Catraca "+ caixa.getNumero());
+        	System.out.println("Caixa "+ caixa.getNumero());
             System.out.println("Clientes atendidos no caixa :" + caixa.getNumeroAtendidos());
             System.out.println("Clientes ainda na fila:" + caixa.totalClientesFila());
             System.out.println("Cliente ainda no caixa:" + (caixa.getClienteAtual() != null));

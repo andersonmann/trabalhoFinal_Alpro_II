@@ -15,7 +15,7 @@ import java.nio.file.Paths;
  * @param <E>
  * 
  */
-public class ReaderSocios<E> extends Reader<E> {
+public class ReaderSocios<E> { //extends Reader<E> {
 	public static QueueLinkedEx<SocioV2> listaSocios;
 
 	public ReaderSocios() {

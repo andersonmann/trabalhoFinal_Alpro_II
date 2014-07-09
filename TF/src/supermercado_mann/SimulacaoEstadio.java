@@ -8,8 +8,8 @@ package supermercado_mann;
  * @param <E>
  * 
  */
-public class SimulacaoEstadio<E> {
-	private static final int totalCatracas = 5;
+public class SimulacaoEstadio<E> {	
+	private static final int totalCatracas = 5;	
 	private static final int duracao = 3600;
 	private static final double probabilidadeChegada = 0.5;
 	private QueueLinkedEx<Catraca<Socio>> catracas;
