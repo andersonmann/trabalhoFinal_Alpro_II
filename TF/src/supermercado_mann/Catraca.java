@@ -21,12 +21,11 @@ public class Catraca<E> extends QueueLinkedEx<E> {
 	private int numero;
 	private Socio socioAtual;
 	private int numeroAtendidos;
-
-	/*Estadio<E> estadio;
-	QueueLinkedEx<Socio> sociosMensalidadeAtrasada = estadio.sociosInadimplentes;*/
-
-	// QueueLinkedEx<Socio> sociosMensalidaEmDia = Estadio.sociosAdimplentes;
-	// QueueLinkedEx<Socio> sociosCadastrados = Estadio.socios;
+	
+	Estadio<E> estadio;
+	QueueLinkedEx<Socio> sociosCadastrados = Estadio.socios;
+	QueueLinkedEx<Socio> sociosMensalidaEmDia = Estadio.sociosAdimplentes;
+	//QueueLinkedEx<Socio> sociosMensalidadeAtrasada = Estadio.sociosInadimplentes;	
 
 	public Catraca() {
 		filaGeral = new QueueLinkedEx<>();
@@ -172,43 +171,64 @@ public class Catraca<E> extends QueueLinkedEx<E> {
 		}
 	}
 
+/*	public boolean verificaMensalidade(int matricula) {
+		for (Socio socio : sociosMensalidadeAtrasada) {
+			if (socio.getMatricula() == matricula) {
+				return true;
+			}
+		}
+		return false;
+	}*/
+
 	/**
 	 * Method entrarNoEstadioSociosComuns
 	 * 
-	 * @return - Adiciona o socio na lista de socios que entraram no estadio.
+	 * @return - Adiciona o socio na lista de socios que entraram no estadio,
+	 *         caso ele não esteja com a mensalidade atrasada.
 	 * @throws EstadioException
 	 */
 	public void entrarNoEstadioSociosComuns(QueueLinkedEx<Socio> s)
 			throws EstadioException {
 		for (Socio sociosComuns : filaSociosComuns) {
-			//if (sociosMensalidadeAtrasada.contains(sociosComuns)) {
-				//throw new EstadioException("Socio com mensalidade atrasada");
-			//}
-			publicoTotal.add(sociosComuns);
+			//if (verificaMensalidade(sociosComuns.getMatricula()) == false) {
+				publicoTotal.add(sociosComuns);
+			}// else
+				 //throw new EstadioException("Socio com mensalidade atrasada");
 		}
-	}
+		//throw new EstadioException("Socio com mensalidade atrasada");
+	//}
 
 	/**
 	 * Method entrarNoEstadioSociosEstudantes
 	 * 
-	 * @return - Adiciona o socio na lista de socios que entraram no estadio.
+	 * @return - Adiciona o socio na lista de socios que entraram no estadio,
+	 *         caso ele não esteja com a mensalidade atrasada.
 	 */
-	public void entrarNoEstadioSociosEstudantes(QueueLinkedEx<E> s) {
+	public void entrarNoEstadioSociosEstudantes(QueueLinkedEx<E> s)
+			throws EstadioException {
 		for (Socio sociosEstudantes : filaSociosEstudantes) {
-			publicoTotal.add(sociosEstudantes);
+			//if (verificaMensalidade(sociosEstudantes.getMatricula()) == true) {
+				publicoTotal.add(sociosEstudantes);
+			} // else
+				// throw new EstadioException("Socio com mensalidade atrasada");
 		}
-	}
+	//}
 
 	/**
 	 * Method entrarNoEstadioSociosIdosos
 	 * 
-	 * @return - Adiciona o socio na lista de socios que entraram no estadio.
+	 * @return - Adiciona o socio na lista de socios que entraram no estadio,
+	 *         caso ele não esteja com a mensalidade atrasada.
 	 */
-	public void entrarNoEstadioSociosIdosos(QueueLinkedEx<Socio> s) {
+	public void entrarNoEstadioSociosIdosos(QueueLinkedEx<Socio> s)
+			throws EstadioException {
 		for (Socio sociosIdosos : filaSociosIdosos) {
-			publicoTotal.add(sociosIdosos);
+			//if (verificaMensalidade(sociosIdosos.getMatricula()) == true) {
+				publicoTotal.add(sociosIdosos);
+			} // else
+				// throw new EstadioException("Socio com mensalidade atrasada");
 		}
-	}
+	//}
 
 	/**
 	 * Method verificaEntrada
